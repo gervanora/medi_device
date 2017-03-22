@@ -1,18 +1,5 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>Medical Device Database System</title>
-		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/styles.css">
-	</head>
-	<body>
-	 	<div class="header">Medical Device Database System</div>
+<?php include 'includes/header.php'; ?>
 		<div class="content">
-			<a href="addproduct_form.php">Add Products</a>
-			<a href="#">List Companies</a>
-			<a href="#">List Brands</a>
-			<a href="#">Product Classifications</a>
+			Home page Content
 		</div>
-		<div class="footer">Copyright @2017</div>
-	</body>
-</html>
+<?php include 'includes/footer.php'; ?>
