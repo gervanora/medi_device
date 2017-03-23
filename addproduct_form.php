@@ -4,13 +4,18 @@
 	    <div>
 	        <h3>Step 1</h3>
 	        <section>
-	            <label for="userName">User name *</label>
-	            <input id="userName" name="userName" type="text" class="required">
-	            <label for="password">Password *</label>
-	            <input id="password" name="password" type="text" class="required">
-	            <label for="confirm">Confirm Password *</label>
-	            <input id="confirm" name="confirm" type="text" class="required">
-	            <p>(*) Mandatory</p>
+	            <div class="form_div"><label>Company Name: </label><input type="text" name="cmpname"></div>
+                <div class="form_div"><label>Product Type: </label>
+                <input type="radio" name="Prodtype" value="UniversityProduct"> University Product      
+                <input type="radio" name="Prodtype" value="ProfiledProduct" required> Profiled  Product  
+                </div>
+                <div class="form_div"><label>Product Brand Name : </label><input type="text" name="prodbrdname" ></div>
+                <div class="form_div"><label>Product Alias Name : </label><input type="text" name="prodbrdname" ></div>
+                <div class="form_div"><label>Product Classification : </label><input type="text" name="prodbrdname"></div>
+                <div class="form_div"><label>Product  Profile Status : </label>
+                <input type="radio" name="Prodprofilestatus" value="Stub"> Stub 
+                <input type="radio" name="Prodprofilestatus" value="Profile"> Profile 
+                </div>
 	        </section>
 	        <h3>Step 2</h3>
 	        <section>

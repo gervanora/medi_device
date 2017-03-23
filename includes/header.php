@@ -16,9 +16,12 @@
         	<ul>
         		<li><a href="index.php">Home</a></li>
 	        	<li><a href="addproduct_form.php">Add Products</a></li>
-				<li><a href="#">List Companies</a></li>
-				<li><a href="#">List Brands</a></li>
+				<li><a href="#">Companies</a></li>
+				<li><a href="#">Brands</a></li>
 				<li><a href="#">Product Classifications</a></li>
+				<li><a href="#">Product Technology</a></li>
+				<li><a href="#">Indication</a></li>
+				<li><a href="#">Application</a></li>
 			</ul>
 		</div>
 	 	</div>
