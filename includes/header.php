@@ -8,7 +8,7 @@
 		<script src="js/jquery.min.js" ></script>
 		<script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.js'></script>
 		<script type="text/javascript" src='js/jquery.steps.js'></script>
-		
+		<script src="js/ckeditor/ckeditor.js"></script>	
 	</head>
 	<body>
 	 	<div class="header">Medical Device Database System

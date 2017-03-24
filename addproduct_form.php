@@ -19,27 +19,27 @@
 	        </section>
 	        <h3>Step 2</h3>
 	        <section>
-	            <label for="name">First name *</label>
-	            <input id="name" name="name" type="text" class="required">
-	            <label for="surname">Last name *</label>
-	            <input id="surname" name="surname" type="text" class="required">
-	            <label for="email">Email *</label>
-	            <input id="email" name="email" type="text" class="required email">
-	            <label for="address">Address</label>
-	            <input id="address" name="address" type="text">
-	            <p>(*) Mandatory</p>
+	            <div class="form_div"><label>Product Description: </label><textarea class="ckeditor" name="ProductDescription"></textarea></div>
+                <div class="form_div"><label>Product Technology : </label><input type="text" name="Prodtechnology" ></div>
+                <div class="form_div"><label>Technology Description : </label><input type="text" name="TechnologyDescription" contenteditable="true" 
+        spellcheck="true" style="width: 300px;height:150px;font-size:14pt;" ></div>
+                <div class="form_div"><label>Product Developing  : </label><input type="text" name="ProductDeveloping"></div>
+                <div class="form_div"><label>Development Partners Any : </label><input type="text" name="DevelopmentPartners"></div>
 	        </section>
 	        <h3>Step 3</h3>
 	        <section>
-	            <ul>
-	                <li>Foo</li>
-	                <li>Bar</li>
-	                <li>Foobar</li>
-	            </ul>
+	            <div class="form_div"><label>Product Description: </label><textarea class="ckeditor" name="ProductDescription"></textarea></div>
+                <div class="form_div"><label>Product Technology : </label><input type="text" name="Prodtechnology" ></div>
+                <div class="form_div"><label>Technology Description : </label><textarea class="ckeditor" name="TechnologyDescription"></textarea></div>
+                <div class="form_div"><label>Product Developing  : </label><input type="text" name="ProductDeveloping"></div>
+                <div class="form_div"><label>Development Partners Any : </label><input type="text" name="DevelopmentPartners"></div>
 	        </section>
 	        <h3>Step 4</h3>
 	        <section>
-	            <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"> <label for="acceptTerms">I agree with the Terms and Conditions.</label>
+	            <div class="form_div"><label>Indication : </label><input type="text" name="ProductDescription" required></div>
+                <div class="form_div"><label>Application : </label><input type="text" name="Prodtechnology" > </div>
+                <div class="form_div"><label>Product Specifications : </label><textarea class="ckeditor" name="TechnologyDescription" ></textarea></div>
+                <div class="form_div"><label>Product Sources  : </label><textarea class="ckeditor" name="ProductDeveloping"></textarea></div>
 	        </section>
 	    </div>
 	</form>
