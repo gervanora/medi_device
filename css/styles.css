@@ -15,6 +15,10 @@ body{
 	margin:10px;
 }
 
+.content{
+	width: 100%;
+}
+
 .form_div{
     margin: 20px 20px;
 }
@@ -33,4 +37,22 @@ body{
 	float: left;
     margin: 0 10px;
     list-style: none;
+}
+
+.listing_title{
+	font-size: 24px;
+    margin: 10px;
+    text-align: center;
+}
+
+.listings table{
+	width: 700px;
+}
+
+.add_form{
+	border: 1px solid;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    width: 48%;
 }
