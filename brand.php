@@ -1,27 +1,27 @@
 <?php include 'includes/header.php';
 
-if(!empty($_POST['company_name'])){
-	//$sql = "INSERT INTO company (company_name) VALUES ('".mysql_real_escape_string($_POST['company_name'])."')";
-    $sql = "INSERT INTO company (company_name) VALUES ('".$_POST['company_name']."')";
+if(!empty($_POST['brand_name'])){
+	//$sql = "INSERT INTO brand (brand_name) VALUES ('".mysql_real_escape_string($_POST['brand_name'])."')";
+    $sql = "INSERT INTO brand (brand_name) VALUES ('".$_POST['brand_name']."')";
 	$conn->query($sql);
 }
-//fetching Companies Data
-$sql = "Select * FROM company";
+//fetching Brands Data
+$sql = "Select * FROM brand";
 $result = $conn->query($sql);
 ?>
   <div class="content">
     <div class="add_form">
     	<form method="POST" action="">
-    		<input type="text" name="company_name" id="company_name" size="60">
-    		<input type="submit" value="Add Company">
+    		<input type="text" name="brand_name" id="brand_name" size="60">
+    		<input type="submit" value="Add Brand">
     	</form>
     </div>
 	  <div class="listings">
-	    <div class="listing_title">List of Companies</div>
+	    <div class="listing_title">List of Brands</div>
 		<div><table border="1" align="center">
 		    <thead>
 			  <td>Sr. no.</td>
-			  <td>Company Name</td>
+			  <td>Brand Name</td>
 			</thead>
 			<tbody>
              <?php if ($result->num_rows > 0) {
@@ -29,7 +29,7 @@ $result = $conn->query($sql);
              ?>
 				<tr>
 					<td><?php echo $row['id']; ?></td>
-					<td><?php echo $row['company_name']; ?></td>
+					<td><?php echo $row['brand_name']; ?></td>
 				</tr>
 			 <?php	}
 				}

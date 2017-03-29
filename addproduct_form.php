@@ -4,7 +4,7 @@
 	    <div>
 	        <h3>Step 1</h3>
 	        <section>
-	            <div class="form_div"><label>Company Name: </label><input type="text" name="cmpname"></div>
+	            <div class="form_div"><label>Company Name: </label><input type="text" name="company_name" class='cpname'></div>
                 <div class="form_div"><label>Product Type: </label>
                 <input type="radio" name="Prodtype" value="UniversityProduct"> University Product      
                 <input type="radio" name="Prodtype" value="ProfiledProduct" required> Profiled  Product  
@@ -182,6 +182,12 @@
                         var targetBox = $("." + inputValue);
                         $(".box").not(targetBox).hide();
                         $(targetBox).show();
+                    });
+
+                    $('input.cpname').typeahead({
+                        name: 'company_name',
+                        remote: 'company_search.php?query=%QUERY'
+
                     });
                 });
 
