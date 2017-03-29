@@ -1,28 +1,28 @@
 <?php include 'includes/header.php'; ?>
 <div class="content">
-	<form id="example-form" action="#">
+	<form id="product_form" action="add_product.php" method="POST">
 	    <div>
 	        <h3>Step 1</h3>
 	        <section>
-	            <div class="form_div"><label>Company Name: </label><input type="text" name="company_name" class='cpname'></div>
+	            <div class="form_div"><label>Company Name: </label><input type="text" name="company_name" id="company_name"></div>
                 <div class="form_div"><label>Product Type: </label>
-                <input type="radio" name="Prodtype" value="UniversityProduct"> University Product      
-                <input type="radio" name="Prodtype" value="ProfiledProduct" required> Profiled  Product  
+                <input type="radio" name="prod_type_1" value="UniversityProduct"> University Product      
+                <input type="radio" name="prod_type_1" value="ProfiledProduct" required> Profiled  Product  
                 </div>
-                <div class="form_div"><label>Product Brand Name : </label><input type="text" name="prodbrdname" ></div>
-                <div class="form_div"><label>Product Alias Name : </label><input type="text" name="prodbrdname" ></div>
-                <div class="form_div"><label>Product Classification : </label><input type="text" name="prodbrdname"></div>
+                <div class="form_div"><label>Product Brand Name : </label><input type="text" name="brand_name" id="brand_name" ></div>
+                <div class="form_div"><label>Product Alias Name : </label><input type="text" name="product_alias" ></div>
+                <div class="form_div"><label>Product Classification : </label><input type="text" name="product_classification"></div>
                 <div class="form_div"><label>Product  Profile Status : </label>
-                <input type="radio" name="Prodprofilestatus" value="Stub"> Stub 
-                <input type="radio" name="Prodprofilestatus" value="Profile"> Profile 
+                <input type="radio" name="profile_status" value="Stub"> Stub 
+                <input type="radio" name="profile_status" value="Profile"> Profile 
                 </div>
 	        </section>
 	        <h3>Step 2</h3>
 	        <section>
                 <div class="form_div"> 
                     <label>Product  Type : </label>
-                    <input type="radio" name="Prodtype" value="Pipeline" class='step2_radio'> Pipeline
-                    <input type="radio" name="Prodtype" value="Markets" class='step2_radio'> Markets
+                    <input type="radio" name="prod_type_2" value="Pipeline" class='step2_radio'> Pipeline
+                    <input type="radio" name="prod_type_2" value="Markets" class='step2_radio'> Markets
                 </div>
                 <div class="Pipeline box" style="display:none;">
                   <div class="sub-title">Pipeline Products info</div>
@@ -131,23 +131,23 @@
 	        </section>
 	        <h3>Step 3</h3>
 	        <section>
-	            <div class="form_div"><label>Product Description: </label><textarea class="ckeditor" name="ProductDescription"></textarea></div>
-                <div class="form_div"><label>Product Technology : </label><input type="text" name="Prodtechnology" ></div>
-                <div class="form_div"><label>Technology Description : </label><textarea class="ckeditor" name="TechnologyDescription"></textarea></div>
-                <div class="form_div"><label>Product Developing  : </label><input type="text" name="ProductDeveloping"></div>
-                <div class="form_div"><label>Development Partners Any : </label><input type="text" name="DevelopmentPartners"></div>
+	            <div class="form_div"><label>Product Description: </label><textarea class="ckeditor" name="product_description"></textarea></div>
+                <div class="form_div"><label>Product Technology : </label><input type="text" name="product_technology" ></div>
+                <div class="form_div"><label>Technology Description : </label><textarea class="ckeditor" name="technology_description"></textarea></div>
+                <div class="form_div"><label>Product Developing  : </label><input type="text" name="product_developing"></div>
+                <div class="form_div"><label>Development Partners Any : </label><input type="text" name="development_partners"></div>
 	        </section>
 	        <h3>Step 4</h3>
 	        <section>
-	            <div class="form_div"><label>Indication : </label><input type="text" name="ProductDescription" required></div>
-                <div class="form_div"><label>Application : </label><input type="text" name="Prodtechnology" > </div>
-                <div class="form_div"><label>Product Specifications : </label><textarea class="ckeditor" name="TechnologyDescription" ></textarea></div>
-                <div class="form_div"><label>Product Sources  : </label><textarea class="ckeditor" name="ProductDeveloping"></textarea></div>
+	            <div class="form_div"><label>Indication : </label><input type="text" name="indication" id="indication" required></div>
+                <div class="form_div"><label>Application : </label><input type="text" name="application" id="application" > </div>
+                <div class="form_div"><label>Product Specifications : </label><textarea class="ckeditor" name="product_specification" ></textarea></div>
+                <div class="form_div"><label>Product Sources  : </label><textarea class="ckeditor" name="product_source"></textarea></div>
 	        </section>
 	    </div>
 	</form>
     <script type="text/javascript">
-            var form = $("#example-form");
+            var form = $("#product_form");
                 form.validate({
                     errorPlacement: function errorPlacement(error, element) { element.before(error); },
                     rules: {
@@ -173,6 +173,7 @@
                     onFinished: function (event, currentIndex)
                     {
                         alert("Submitted!");
+                        $('#product_form').submit();
                     }
                 });
 
@@ -184,11 +185,23 @@
                         $(targetBox).show();
                     });
 
-                    $('input.cpname').typeahead({
-                        name: 'company_name',
-                        remote: 'company_search.php?query=%QUERY'
-
+                    $("#company_name").autocomplete({
+                        source: 'company_search.php'
                     });
+
+                    $("#brand_name").autocomplete({
+                        source: 'brand_search.php'
+                    });
+
+                    $("#indication").autocomplete({
+                        source: 'indication_search.php'
+                    });
+
+                    $("#application").autocomplete({
+                        source: 'application_search.php'
+                    });
+
+                    
                 });
 
                 function myFunction() {
