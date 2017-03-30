@@ -62,3 +62,19 @@ body{
     font-size: 20px;
     font-weight: bold;
 }
+
+.classification_listing table{
+	width: 100%;
+}
+
+.classification_form{
+	border: 1px solid;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+}
+
+.classification_form label{
+	min-width: 100px;
+}

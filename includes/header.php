@@ -21,7 +21,7 @@
 	        	<li><a href="addproduct_form.php">Add Products</a></li>
 				<li><a href="companies.php">Companies</a></li>
 				<li><a href="brand.php">Brands</a></li>
-				<li><a href="#">Product Classifications</a></li>
+				<li><a href="product_classification.php">Product Classifications</a></li>
 				<li><a href="#">Product Technology</a></li>
 				<li><a href="indication.php">Indication</a></li>
 				<li><a href="application.php">Application</a></li>
