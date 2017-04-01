@@ -1,8 +1,14 @@
 <?php include 'includes/header.php';
 
-if(!empty($_POST['company_name'])){
-	//$sql = "INSERT INTO company (company_name) VALUES ('".mysql_real_escape_string($_POST['company_name'])."')";
-    $sql = "INSERT INTO company (company_name) VALUES ('".$_POST['company_name']."')";
+if(!empty($_POST['classification_name'])){
+    $fetch_classification = "Select id FROM product_classification WHERE classification_fullname='".$_POST['parent_id']."'";
+	$parent_classification = $conn->query($fetch_classification);	
+	$parent_id = $parent_classification->fetch_assoc();
+	$parent_id = $parent_id['id'];
+
+    $full_path = $_POST['parent_id'].' -> '.$_POST['classification_name'];
+
+	$sql = "INSERT INTO product_classification (classification_name,parent_id,classification_fullname,level) VALUES ('".$_POST['classification_name']."',$parent_id,'".$full_path."','".$_POST['level']."')";
 	$conn->query($sql);
 }
 //fetching Companies Data
@@ -14,7 +20,7 @@ $result = $conn->query($sql);
     	<form method="POST" action="">
             <div class="form_div">
     			<label>Classification name: </label>
-    			<input type="text" name="company_name" id="classification_name" size="60">
+    			<input type="text" name="classification_name" id="classification_name" size="60">
     		</div>
             <div class="form_div">
     			<label>Parent Classification: </label>
@@ -47,7 +53,7 @@ $result = $conn->query($sql);
 				<tr>
 					<td><?php echo $row['id']; ?></td>
 					<td><?php echo $row['classification_name']; ?></td>
-					<td><?php echo $row['classification_name']; ?></td>
+					<td><?php echo $row['classification_fullname']; ?></td>
 					<td><?php echo $row['level']; ?></td>
 				</tr>
 			 <?php	}
