@@ -126,10 +126,26 @@
 
                 </div>
                 <div>
-                Product MileStones ::
-                    <div class="form_div"><label>Milestone date  : <label><input type="date" name="Milestonedate" > </div>
+                Product MileStones : <a href="javascript:void(0);" id='extra_milestone'>Add More Milestones</a>
+                    <table border="1" width="100%" class="milestone_list">
+                      <thead>
+                        <tr>
+                          <td width="10%">Date</td>
+                          <td width="70%">Title</td>
+                          <td width="20%">Type</td>
+                        </tr>
+                        <tbody class="milestone_entry">
+                          <tr>
+                            <td><input type="date" name="Milestonedate" ></td>
+                            <td><input type="text" name="Milestonetitle" ></td>
+                            <td><input type="text" name="Milestonetype" ></td>
+                          </tr>
+                        </tbody>
+                      </thead>
+                    </table>
+                    <!--div class="form_div"><label>Milestone date  : <label><input type="date" name="Milestonedate" > </div>
                     <div class="form_div"><label>Milestone title : <label><input type="text" name="Milestonetitle" > </div>
-                    <div class="form_div"><label>Milestone type  : <label><input type="text" name="Milestonetype" > </div>  
+                    <div class="form_div"><label>Milestone type  : <label><input type="text" name="Milestonetype" > </div-->  
                 </div>  
 	        </section>
 	        <h3>Step 3</h3>
@@ -209,13 +225,17 @@
                       select:function (event, ui) {
                         //alert(ui.item.id);
                         //alert(ui.item.label)
-                        $('#classification_list').append('<div id="classification'+ui.item.id+'">'+ui.item.label+'<input type="hidden" value="'+ui.item.id+'"><div class="del_classification"><img src="images/delete.png"/></div></div>')
+                        $('#classification_list').append('<div id="classification'+ui.item.id+'">'+ui.item.label+'<input type="hidden" name="classifications[]" value="'+ui.item.id+'"><div class="del_classification"><img src="images/delete.png"/></div></div>')
                       }
                   }); 
 
                   $("#classification_list").on("click","img",function(){
                     //alert('');
                     $(this).parents().eq(1).remove();
+                  });
+
+                  $('#extra_milestone').click(function(){
+                    $('.milestone_entry').append('<tr><td><input type="date" name="Milestonedate" ></td><td><input type="text" name="Milestonetitle" ></td><td><input type="text" name="Milestonetype" ></td></tr>');
                   });
                     
                 });

@@ -95,3 +95,10 @@ body{
 .del_classification img{
 	width:12px;
 }
+
+.milestone_list input{
+	text-align: center;
+	margin: 10px;
+    height: 25px;
+    width:90%;
+}
