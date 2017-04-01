@@ -78,3 +78,20 @@ body{
 .classification_form label{
 	min-width: 100px;
 }
+
+#classification_list{
+	background: white;
+    padding: 10px;
+    width: 75%;
+    border: 1px solid darkgrey;
+    min-height: 100px;
+    margin-left: 270px;
+}
+
+.del_classification{
+	display: inline-block;
+}
+
+.del_classification img{
+	width:12px;
+}

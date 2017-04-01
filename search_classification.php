@@ -10,7 +10,8 @@ if (isset($_REQUEST['term'])) {
 	        $data[] = array (
 	            'label' => $row['classification_fullname'],
 	            'value' => $row['classification_fullname'],
-	        );
+	            'id' 	=> $row['id'],
+ 	        );
 	    }
 
 	echo json_encode ($data);

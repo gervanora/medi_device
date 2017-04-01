@@ -11,7 +11,10 @@
                 </div>
                 <div class="form_div"><label>Product Brand Name : </label><input type="text" name="brand_name" id="brand_name" ></div>
                 <div class="form_div"><label>Product Alias Name : </label><input type="text" name="product_alias" ></div>
-                <div class="form_div"><label>Product Classification : </label><input type="text" name="product_classification"></div>
+                <div class="form_div"><label>Product Generic Name : </label><input type="text" name="generic_name" ></div>
+                <div class="form_div"><label>Product Classification : </label><input type="text" name="product_classification" id="product_classification"></div>
+                <div id='classification_list'>
+                </div>
                 <div class="form_div"><label>Product  Profile Status : </label>
                 <input type="radio" name="profile_status" value="Stub"> Stub 
                 <input type="radio" name="profile_status" value="Profile"> Profile 
@@ -201,6 +204,19 @@
                         source: 'application_search.php'
                     });
 
+                    $("#product_classification").autocomplete({
+                      source: 'search_classification.php',
+                      select:function (event, ui) {
+                        //alert(ui.item.id);
+                        //alert(ui.item.label)
+                        $('#classification_list').append('<div id="classification'+ui.item.id+'">'+ui.item.label+'<input type="hidden" value="'+ui.item.id+'"><div class="del_classification"><img src="images/delete.png"/></div></div>')
+                      }
+                  }); 
+
+                  $("#classification_list").on("click","img",function(){
+                    //alert('');
+                    $(this).parents().eq(1).remove();
+                  });
                     
                 });
 
