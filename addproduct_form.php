@@ -1,4 +1,5 @@
 <?php include 'includes/header.php'; ?>
+<?php include 'addproduct_info.php' ?>
 <div class="content">
 	<form id="product_form" action="add_product.php" method="POST">
 	    <div>
@@ -31,7 +32,29 @@
                   <div class="sub-title">Pipeline Products info</div>
 
                   <div class="form_div">
-                    <label>Country Specific Regulatory Bodies: </label><input type="text" name="cntryspecify">
+                    <label>Country Specific Regulatory Bodies: </label>
+                    <select id="CRbody" onChange="myFunction()" name="country_reg_body">
+                      <option value="select">select</option>
+                      <option value="510k">510k</option>
+                      <option value="PMA">PMA</option>
+                      <option value="CE">CE</option>
+                    </select>
+                  </div>
+                  <div class="form_div">
+                    <label>Developing Country(Pipeline Territory): </label>
+                    <select name='pipeline_country'>
+                      <?php foreach($countries as $country) { ?>
+                        <option value="<?php echo $country[0]; ?>"><?php echo $country[2]; ?></option>
+                    <?php } ?>
+                    </select>
+                  </div>
+                  <div class="form_div">
+                    <label>Approved in other regions: </label>
+                    <select name='approved_country'>
+                      <?php foreach($countries as $country) { ?>
+                        <option value="<?php echo $country[0]; ?>"><?php echo $country[2]; ?></option>
+                    <?php } ?>
+                    </select>
                   </div>
                   <div class="form_div">
                   <label>Estimated Approval Date : </label>
@@ -59,6 +82,11 @@
                       <option value="2023">2023</option>
                       <option value="2024">2024</option>
                       <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                      <option value="2027">2027</option>
+                      <option value="2028">2028</option>
+                      <option value="2029">2029</option>
+                      <option value="2030">2030</option>
                     </select>
                 </div>
                   <div class="form_div">
@@ -87,8 +115,20 @@
                       <option value="2023">2023</option>
                       <option value="2024">2024</option>
                       <option value="2025">2025</option>
+                      <option value="2026">2026</option>
+                      <option value="2027">2027</option>
+                      <option value="2028">2028</option>
+                      <option value="2029">2029</option>
+                      <option value="2030">2030</option>
                     </select>
                 </div>
+                  <div class="form_div">
+                    <label>Device Class: </label>
+                    <select name="device_class">
+                      <option value="select">select</option>
+                      <option value="device_class-1">test device class</option>
+                    </select>
+                  </div>
                   <div class="form_div">
                     <label>Analyst Notes : </label><input type="text" name="AnalystNotes" >
                   </div>
@@ -99,30 +139,29 @@
 
                 <div class="form_div">
                   <label>Approved Country: </label>
-                    <select>
-                      <option value="US">US</option>
-                      <option value="Europe">Europe</option>
-                      <option value="Others">Others</option>
+                    <select name='approved_country'>
+                      <?php foreach($countries as $country) { ?>
+                        <option value="<?php echo $country[0]; ?>"><?php echo $country[2]; ?></option>
+                    <?php } ?>
                     </select>
                 </div>
 
                 <div class="form_div">
                     <label>Concern Regulatory body : </label>
-                    <select id="CRbody" onChange="myFunction()">
+                    <select id="CRbody" onChange="myFunction()" name="country_reg_body">
                       <option value="select">select</option>
                       <option value="510k">510k</option>
                       <option value="PMA">PMA</option>
                       <option value="CE">CE</option>
                     </select>
                 </div>
-
-                <div class="510k">
-                  <div class="form_div"><label>Number : </label><input type="text" name="Deviceregulatory"></div>
-                  <div class="form_div"><label>Submission date : </label><input type="date" name="USFDAApproved" ></div>
-                  <div class="form_div"><label>Approval Date  : </label><input type="date" name="ModificationsSupliments" ></div>
-                  <div class="form_div"><label>Product launch date : </label><input type="date" name="USFDAApproved" ></div>
-                  <div class="form_div"><label>Modification and Specification  : </label><input type="text" name="ModificationsSupliments" > </div>
-                </div>
+                  <div class="form_div"><label>510K Number : </label><input type="text" name="510k_num"></div>
+                  <div class="form_div"><label>PMA Number : </label><input type="text" name="pma_num"></div>
+                  <div class="form_div"><label>Submission date : </label><input type="date" name="submission_date" ></div>
+                  <div class="form_div"><label>Approval Date  : </label><input type="date" name="approval_date" ></div>
+                  <div class="form_div"><label>Product launch date : </label><input type="date" name="launch_date" ></div>
+                  <div class="form_div"><label>510K Modification No.  : </label><input type="text" name="510k_mod_num" > </div>
+                  <div class="form_div"><label>PMA Modification No.  : </label><input type="text" name="pma_mod_num" > </div>
 
                 </div>
                 <div>
