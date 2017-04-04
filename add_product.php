@@ -73,8 +73,8 @@ $product_main['university_pipelined'] = $_POST['prod_type_1'];
 $product_main['alias_name'] = $_POST['product_alias'];
 $product_main['generic_name'] = $_POST['generic_name'];
 $product_main['profile_status'] = $_POST['profile_status'];
+$product_main['pipelined_marketed'] = $_POST['prod_type_2'];
 
-//pipeline or marketed
 //product technology
 
 $product_main['product_description'] = $_POST['product_description'];
@@ -83,7 +83,7 @@ $product_main['product_specification'] = $_POST['product_specification'];
 $product_main['product_sources'] = $_POST['product_source'];
 
 //product main insert query  
-$product_insert = "INSERT INTO products (university_pipelined,alias_name ,generic_name,profile_status,product_description,product_tech_description,product_specification,product_sources,company_id,brand_id,indication_id,application_id) VALUES ('".$product_main['university_pipelined']."','".$product_main['alias_name']."','".$product_main['generic_name']."','".$product_main['profile_status']."','".$product_main['product_description']."','".$product_main['product_tech_description']."','".$product_main['product_specification']."','".$product_main['product_sources']."',".$product_main['company_id'].",".$product_main['brand_id'].",".$product_main['indication_id'].",".$product_main['application_id'].")";
+$product_insert = "INSERT INTO products (university_pipelined,alias_name ,generic_name,profile_status,pipelined_marketed,product_description,product_tech_description,product_specification,product_sources,company_id,brand_id,indication_id,application_id) VALUES ('".$product_main['university_pipelined']."','".$product_main['alias_name']."','".$product_main['generic_name']."','".$product_main['profile_status']."','".$product_main['pipelined_marketed']."','".$product_main['product_description']."','".$product_main['product_tech_description']."','".$product_main['product_specification']."','".$product_main['product_sources']."',".$product_main['company_id'].",".$product_main['brand_id'].",".$product_main['indication_id'].",".$product_main['application_id'].")";
 
 $conn->query($product_insert);
 $product_id = mysqli_insert_id($conn);
@@ -104,6 +104,14 @@ while(!empty($_POST['Milestonetitle_'.$m])){
     $milestone_query = "INSERT INTO product_milestones(milestone_title,milestone_date,milestone_type) VALUES('".$_POST['Milestonetitle_'.$m]."','".$_POST['Milestonedate_'.$m]."','".$_POST['Milestonetype_'.$m]."')";
 	$conn->query($milestone_query);
 	$m++;
+}
+
+if($product_main['pipelined_marketed'] == "Markets"){
+	$markets_insert = "INSERT INTO market_product(product_id,approved_country_id,regulatory_body,510_num,pma_num,510_mod_num,pma_mod_num,submission_date,approval_date,launch_date) VALUES(".$product_id.",".$_POST['approved_country'].",'".$_POST['country_reg_body']."','".$_POST['510_num']."','".$_POST['pma_num']."','".$_POST['510_mod_num']."','".$_POST['pma_mod_num']."','".$_POST['submission_date']."','".$_POST['approval_date']."','".$_POST['launch_date']."')";
+	$conn->query($markets_insert);
+}
+elseif ($product_main['pipelined_marketed'] == "Pipeline") {
+	
 }
 
 print_r($product_main);
