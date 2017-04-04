@@ -175,9 +175,9 @@
                         </tr>
                         <tbody class="milestone_entry">
                           <tr>
-                            <td><input type="date" name="Milestonedate" ></td>
-                            <td><input type="text" name="Milestonetitle" ></td>
-                            <td><input type="text" name="Milestonetype" ></td>
+                            <td><input type="date" name="Milestonedate_1" ></td>
+                            <td><input type="text" name="Milestonetitle_1" ></td>
+                            <td><input type="text" name="Milestonetype_1" ></td>
                           </tr>
                         </tbody>
                       </thead>
@@ -205,6 +205,7 @@
 	    </div>
 	</form>
     <script type="text/javascript">
+            var curr_milestone = 2;
             var form = $("#product_form");
                 form.validate({
                     errorPlacement: function errorPlacement(error, element) { element.before(error); },
@@ -274,7 +275,8 @@
                   });
 
                   $('#extra_milestone').click(function(){
-                    $('.milestone_entry').append('<tr><td><input type="date" name="Milestonedate" ></td><td><input type="text" name="Milestonetitle" ></td><td><input type="text" name="Milestonetype" ></td></tr>');
+                    $('.milestone_entry').append('<tr><td><input type="date" name="Milestonedate_'+curr_milestone+'" ></td><td><input type="text" name="Milestonetitle_'+curr_milestone+'" ></td><td><input type="text" name="Milestonetype_'+curr_milestone+'" ></td></tr>');
+                    curr_milestone++;
                   });
                     
                 });

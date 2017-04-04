@@ -82,18 +82,55 @@ $product_main['product_tech_description'] = $_POST['technology_description'];
 $product_main['product_specification'] = $_POST['product_specification'];
 $product_main['product_sources'] = $_POST['product_source'];
 
-//product main insert query
+//product main insert query  
+$product_insert = "INSERT INTO products (university_pipelined,alias_name ,generic_name,profile_status,product_description,product_tech_description,product_specification,product_sources,company_id,brand_id,indication_id,application_id) VALUES ('".$product_main['university_pipelined']."','".$product_main['alias_name']."','".$product_main['generic_name']."','".$product_main['profile_status']."','".$product_main['product_description']."','".$product_main['product_tech_description']."','".$product_main['product_specification']."','".$product_main['product_sources']."',".$product_main['company_id'].",".$product_main['brand_id'].",".$product_main['indication_id'].",".$product_main['application_id'].")";
 
-$product_id = 1; //last insert id
+$conn->query($product_insert);
+$product_id = mysqli_insert_id($conn);
+
 
 for($i = 0;$i<count($_POST['classifications']);$i++){
 	$classification['product_id'] = $product_id;
-	$classification['product_classification_id'] = $product_id$_POST['classifications'][$i];
-	//insert query
-	
+	$classification['product_classification_id'] = $_POST['classifications'][$i];
+
+$classification_insert = "INSERT INTO product_to_classification(product_id,product_classification_id) VALUES(".$classification['product_id'].",".$classification['product_classification_id'].")";
+$conn->query($classification_insert);
+
 }  
 
-print_r($product_main);
+$m = 1;
 
+while(!empty($_POST['Milestonetitle_'.$m])){
+    $milestone_query = "INSERT INTO product_milestones(milestone_title,milestone_date,milestone_type) VALUES('".$_POST['Milestonetitle_'.$m]."','".$_POST['Milestonedate_'.$m]."','".$_POST['Milestonetype_'.$m]."')";
+	$conn->query($milestone_query);
+	$m++;
+}
+
+print_r($product_main);
+?>
+<div>
+	<strong>Product Information</strong>
+	<div>Company name:</div>
+	<div>Product type:</div>
+	<div>Brand name:</div>
+	<div>Alias name:</div>
+	<div>Generic name:</div>
+	<div>Product Classification:</div>
+	<div>Profile Status:</div>
+	<div>Product Type:</div>
+	<div>Product Milestones:</div>
+	<div>Product Description:</div>
+	<div>Product Technology:</div>
+	<div>Technology Description:</div>
+	<div>Product Developing:</div>
+	<div>Developing Partners:</div>
+	<div>Indication:</div>
+	<div>Application:</div>
+	<div>Product Specification:</div>
+	<div>Product Sources:</div>
+</div>
+
+<?php
 die;
 ?>
+<?php include 'includes/footer.php'; ?>
