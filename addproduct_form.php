@@ -58,21 +58,21 @@
                   </div>
                   <div class="form_div">
                   <label>Estimated Approval Date : </label>
-                    <select>
-                      <option value="Jan">Jan</option>
-                      <option value="Feb">Feb</option>
-                      <option value="Mar">Mar</option>
-                      <option value="Apr">Apr</option>
-                      <option value="May">May</option>
-                      <option value="June">June</option>
-                      <option value="July">July</option>
-                      <option value="Aug">Aug</option>
-                      <option value="Sep">Sep</option>
-                      <option value="Oct">Oct</option>
-                      <option value="Nov">Nov</option>
-                      <option value="Dec">Dec</option>
+                    <select name="estimated_approval_month">
+                      <option value="01">Jan</option>
+                      <option value="02">Feb</option>
+                      <option value="03">Mar</option>
+                      <option value="04">Apr</option>
+                      <option value="05">May</option>
+                      <option value="06">June</option>
+                      <option value="07">July</option>
+                      <option value="08">Aug</option>
+                      <option value="09">Sep</option>
+                      <option value="10">Oct</option>
+                      <option value="11">Nov</option>
+                      <option value="12">Dec</option>
                     </select>
-                    <select>
+                    <select name="estimated_approval_year">
                       <option value="2017">2017</option>
                       <option value="2018">2018</option>
                       <option value="2019">2019</option>
@@ -91,21 +91,21 @@
                 </div>
                   <div class="form_div">
                   <label>Estimated Launch Date : </label>
-                  <select>
-                      <option value="Jan">Jan</option>
-                      <option value="Feb">Feb</option>
-                      <option value="Mar">Mar</option>
-                      <option value="Apr">Apr</option>
-                      <option value="May">May</option>
-                      <option value="June">June</option>
-                      <option value="July">July</option>
-                      <option value="Aug">Aug</option>
-                      <option value="Sep">Sep</option>
-                      <option value="Oct">Oct</option>
-                      <option value="Nov">Nov</option>
-                      <option value="Dec">Dec</option>
+                  <select name="estimated_launch_month">
+                      <option value="01">Jan</option>
+                      <option value="02">Feb</option>
+                      <option value="03">Mar</option>
+                      <option value="04">Apr</option>
+                      <option value="05">May</option>
+                      <option value="06">June</option>
+                      <option value="07">July</option>
+                      <option value="08">Aug</option>
+                      <option value="09">Sep</option>
+                      <option value="10">Oct</option>
+                      <option value="11">Nov</option>
+                      <option value="12">Dec</option>
                     </select>
-                    <select>
+                    <select name="estimated_launch_year">
                       <option value="2017">2017</option>
                       <option value="2018">2018</option>
                       <option value="2019">2019</option>

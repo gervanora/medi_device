@@ -111,10 +111,14 @@ if($product_main['pipelined_marketed'] == "Markets"){
 	$conn->query($markets_insert);
 }
 elseif ($product_main['pipelined_marketed'] == "Pipeline") {
-	
+    $estimated_approval = $_POST['estimated_approval_year'].'-'.$_POST['estimated_approval_month'].'-01';
+    $estimated_launch = $_POST['estimated_launch_year'].'-'.$_POST['estimated_launch_month'].'-01';
+    //echo $estimated_approval; echo $estimated_launch;
+	//die;
+	$pipeline_insert = "INSERT INTO pipeline_product(product_id,country_reg_body,developing_country_id,approved_other,estimated_approval,estimated_launch,device_class,analyst_notes) VALUES(".$product_id.",'".$_POST['country_reg_body']."',".$_POST['pipeline_country'].",'".$_POST['approved_country']."','".$estimated_approval."','".$estimated_launch."','".$_POST['device_class']."','".$_POST['AnalystNotes']."')";
+	$conn->query($pipeline_insert);
 }
 
-print_r($product_main);
 ?>
 <div>
 	<strong>Product Information</strong>
