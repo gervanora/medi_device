@@ -107,7 +107,7 @@ while(!empty($_POST['Milestonetitle_'.$m])){
 }
 
 if($product_main['pipelined_marketed'] == "Markets"){
-	$markets_insert = "INSERT INTO market_product(product_id,approved_country_id,regulatory_body,510_num,pma_num,510_mod_num,pma_mod_num,submission_date,approval_date,launch_date) VALUES(".$product_id.",".$_POST['approved_country'].",'".$_POST['country_reg_body']."','".$_POST['510_num']."','".$_POST['pma_num']."','".$_POST['510_mod_num']."','".$_POST['pma_mod_num']."','".$_POST['submission_date']."','".$_POST['approval_date']."','".$_POST['launch_date']."')";
+	$markets_insert = "INSERT INTO market_product(product_id,approved_country_id,regulatory_body,510_num,pma_num,510_mod_num,pma_mod_num,submission_date,approval_date,launch_date) VALUES(".$product_id.",".$_POST['approved_country'].",'".$_POST['country_reg_body']."','".$_POST['510k_num']."','".$_POST['pma_num']."','".$_POST['510k_mod_num']."','".$_POST['pma_mod_num']."','".$_POST['submission_date']."','".$_POST['approval_date']."','".$_POST['launch_date']."')";
 	$conn->query($markets_insert);
 }
 elseif ($product_main['pipelined_marketed'] == "Pipeline") {
