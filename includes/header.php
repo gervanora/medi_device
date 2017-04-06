@@ -19,6 +19,7 @@
         	<ul>
         		<li><a href="index.php">Home</a></li>
 	        	<li><a href="addproduct_form.php">Add Products</a></li>
+	        	<li><a href="list_products.php">List Products</a></li>
 				<li><a href="companies.php">Companies</a></li>
 				<li><a href="brand.php">Brands</a></li>
 				<li><a href="product_classification.php">Product Classifications</a></li>
