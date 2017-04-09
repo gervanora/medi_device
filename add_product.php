@@ -5,7 +5,7 @@ echo "Below is the data you entered";
 echo "<pre>";
 print_r($_POST);
 echo "</pre>";
-
+die;
 $product_main = array();
 
 //fetch company id

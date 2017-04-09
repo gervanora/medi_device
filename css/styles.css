@@ -115,3 +115,30 @@ body{
     width: 150px;
     margin-left: 270px;
 }
+
+#save_pipeline a,#save_marketed a{
+   background: #2184be;
+    color: #fff;
+    display: block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 150px;
+    margin-left: 270px; 
+    margin-bottom: 10px;
+}
+
+#pipeline_list,#marketed_list{
+    width:100%;
+    margin-bottom:20px;
+}
+
+.del_pipelinedata img{
+    width:12px;
+}
+
+.del_pipelinedata{
+    text-align: center;
+}

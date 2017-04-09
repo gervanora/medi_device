@@ -1,11 +1,11 @@
 <?php include 'includes/header.php'; ?>
 <?php include 'addproduct_info.php' ?>
 <div class="content">
-	<form id="product_form" action="add_product.php" method="POST">
-	    <div>
-	        <h3>Step 1</h3>
-	        <section>
-	            <div class="form_div"><label>Company Name: </label><input type="text" name="company_name" id="company_name"></div>
+  <form id="product_form" action="add_product.php" method="POST">
+      <div>
+          <h3>Step 1</h3>
+          <section>
+              <div class="form_div"><label>Company Name: </label><input type="text" name="company_name" id="company_name"></div>
                 <div class="form_div"><label>Product Type: </label>
                 <input type="radio" name="prod_type_1" value="UniversityProduct"> University Product      
                 <input type="radio" name="prod_type_1" value="ProfiledProduct" required> Profiled  Product  
@@ -21,9 +21,9 @@
                 <input type="radio" name="profile_status" value="Profile"> Profile 
                 </div>
                 <div style="display:none;" class="save-stub"><a href="javascript:void(0);">Save Stub Product</a></div>
-	        </section>
-	        <h3>Step 2</h3>
-	        <section>
+          </section>
+          <h3>Step 2</h3>
+          <section>
                 <div class="form_div"> 
                     <label>Product  Type : </label>
                     <input type="radio" name="prod_type_2" value="Pipeline" class='step2_radio'> Pipeline
@@ -34,7 +34,7 @@
 
                   <div class="form_div">
                     <label>Country Specific Regulatory Bodies: </label>
-                    <select id="CRbody" onChange="myFunction()" name="country_reg_body">
+                    <select onChange="myFunction()" id="country_reg_body">
                       <option value="select">select</option>
                       <option value="510k">510k</option>
                       <option value="PMA">PMA</option>
@@ -43,23 +43,23 @@
                   </div>
                   <div class="form_div">
                     <label>Developing Country(Pipeline Territory): </label>
-                    <select name='pipeline_country'>
+                    <select id='pipeline_country'>
                       <?php foreach($countries as $country) { ?>
-                        <option value="<?php echo $country[0]; ?>"><?php echo $country[2]; ?></option>
+                        <option value="<?php echo $country[2]; ?>"><?php echo $country[2]; ?></option>
                     <?php } ?>
                     </select>
                   </div>
                   <div class="form_div">
                     <label>Approved in other regions: </label>
-                    <select name='approved_country'>
+                    <select id="approved_country">
                       <?php foreach($countries as $country) { ?>
-                        <option value="<?php echo $country[0]; ?>"><?php echo $country[2]; ?></option>
+                        <option value="<?php echo $country[2]; ?>"><?php echo $country[2]; ?></option>
                     <?php } ?>
                     </select>
                   </div>
                   <div class="form_div">
                   <label>Estimated Approval Date : </label>
-                    <select name="estimated_approval_month">
+                    <select id="estimated_approval_month">
                       <option value="01">Jan</option>
                       <option value="02">Feb</option>
                       <option value="03">Mar</option>
@@ -73,7 +73,7 @@
                       <option value="11">Nov</option>
                       <option value="12">Dec</option>
                     </select>
-                    <select name="estimated_approval_year">
+                    <select id="estimated_approval_year">
                       <option value="2017">2017</option>
                       <option value="2018">2018</option>
                       <option value="2019">2019</option>
@@ -92,7 +92,7 @@
                 </div>
                   <div class="form_div">
                   <label>Estimated Launch Date : </label>
-                  <select name="estimated_launch_month">
+                  <select id="estimated_launch_month">
                       <option value="01">Jan</option>
                       <option value="02">Feb</option>
                       <option value="03">Mar</option>
@@ -106,7 +106,7 @@
                       <option value="11">Nov</option>
                       <option value="12">Dec</option>
                     </select>
-                    <select name="estimated_launch_year">
+                    <select id="estimated_launch_year">
                       <option value="2017">2017</option>
                       <option value="2018">2018</option>
                       <option value="2019">2019</option>
@@ -125,15 +125,34 @@
                 </div>
                   <div class="form_div">
                     <label>Device Class: </label>
-                    <select name="device_class">
+                    <select id="device_class">
                       <option value="select">select</option>
                       <option value="device_class-1">test device class</option>
                     </select>
                   </div>
                   <div class="form_div">
-                    <label>Analyst Notes : </label><input type="text" name="AnalystNotes" >
+                    <label>Analyst Notes : </label><input type="text" id="AnalystNotes">
                   </div>
-
+                  <div id="save_pipeline">
+                    <a href="javascript:void(0);">Save</a>
+                  </div>
+                  <div id='pipeline_list'>
+                    <table width="100%" border="1">
+                      <thead>
+                        <td>Regulatory Body</td>
+                        <td>Developing Country</td>
+                        <td>Approved in other</td>
+                        <td>Estimated Approval</td>
+                        <td>Estimated Launch</td>
+                        <td>Device Class</td>
+                        <td>Analyst Notes</td>
+                        <td>Action</td>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
                 <div class="Markets box" style="display:none;">
                     <div class="sub-title">Marketed Products info</div>
@@ -163,7 +182,28 @@
                   <div class="form_div"><label>Product launch date : </label><input type="date" name="launch_date" ></div>
                   <div class="form_div"><label>510K Modification No.  : </label><input type="text" name="510k_mod_num" > </div>
                   <div class="form_div"><label>PMA Modification No.  : </label><input type="text" name="pma_mod_num" > </div>
-
+                  <div id="save_marketed">
+                    <a href="javascript:void(0);">Save</a>
+                  </div>
+                  <div id='marketed_list'>
+                    <table width="100%" border="1">
+                      <thead>
+                        <td>Appr. Country</td>
+                        <td>Reg. Body</td>
+                        <td>510k num</td>
+                        <td>Pma num</td>
+                        <td>Submission date</td>
+                        <td>Approval date</td>
+                        <td>Launch date</td>
+                        <td>510k mod num</td>
+                        <td>Pma mod num</td>
+                        <td>Action</td>
+                      </thead>
+                      <tbody>
+                        
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
                 <div>
                 Product MileStones : <a href="javascript:void(0);" id='extra_milestone'>Add More Milestones</a>
@@ -192,28 +232,29 @@
                     <div class="form_div"><label>Milestone title : <label><input type="text" name="Milestonetitle" > </div>
                     <div class="form_div"><label>Milestone type  : <label><input type="text" name="Milestonetype" > </div-->  
                 </div>  
-	        </section>
-	        <h3>Step 3</h3>
-	        <section>
-	            <div class="form_div"><label>Product Description: </label><textarea class="ckeditor" name="product_description"></textarea></div>
+          </section>
+          <h3>Step 3</h3>
+          <section>
+              <div class="form_div"><label>Product Description: </label><textarea class="ckeditor" name="product_description"></textarea></div>
                 <div class="form_div"><label>Product Technology : </label><input type="text" name="product_technology" id="product_technology" ></div>
                 <div id='technology_list'>
                 </div>
                 <div class="form_div"><label>Technology Description : </label><textarea class="ckeditor" name="technology_description"></textarea></div>
                 <div class="form_div"><label>Product Developing  : </label><input type="text" name="product_developing"></div>
                 <div class="form_div"><label>Development Partners Any : </label><input type="text" name="development_partners"></div>
-	        </section>
-	        <h3>Step 4</h3>
-	        <section>
-	            <div class="form_div"><label>Indication : </label><input type="text" name="indication" id="indication" required></div>
+          </section>
+          <h3>Step 4</h3>
+          <section>
+              <div class="form_div"><label>Indication : </label><input type="text" name="indication" id="indication" required></div>
                 <div class="form_div"><label>Application : </label><input type="text" name="application" id="application" > </div>
                 <div class="form_div"><label>Product Specifications : </label><textarea class="ckeditor" name="product_specification" ></textarea></div>
                 <div class="form_div"><label>Product Sources  : </label><textarea class="ckeditor" name="product_source"></textarea></div>
-	        </section>
-	    </div>
-	</form>
+          </section>
+      </div>
+  </form>
     <script type="text/javascript">
             var curr_milestone = 2;
+            var curr_pipeline = 0;
             var form = $("#product_form");
                 form.validate({
                     errorPlacement: function errorPlacement(error, element) { element.before(error); },
@@ -313,6 +354,38 @@
                   $('.save-stub a').click(function(){
                     $('#product_form').submit();
                   });
+                  
+                  $('#save_pipeline a').click(function(){
+                    var country_reg_body = $('#country_reg_body').val();
+                    var pipeline_country = $('#pipeline_country').val();
+                    var approved_country = $('#approved_country').val();
+                    var estimated_approval = $('#country_reg_body').val();
+                    var estimated_launch = $('#country_reg_body').val();
+                    var device_class = $('#device_class').val();
+                    var AnalystNotes = $('#AnalystNotes').val();
+
+                    $('#pipeline_list tbody').append('<tr><td><input name="pipeline_data['+curr_pipeline+'][country_reg_body]" type="text" value="'+country_reg_body+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][pipeline_country]" type="text" value="'+pipeline_country+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][approved_country]" type="text" value="'+approved_country+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][estimated_approval]" type="text" value="'+estimated_approval+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][estimated_launch]" type="text" value="'+estimated_launch+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][device_class]" type="text" value="'+device_class+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][AnalystNotes]" type="text" value="'+AnalystNotes+'"/></td><td class="del_pipelinedata"><img src="images/delete.png"/></td></tr>');
+                    curr_pipeline++;
+                  });
+
+                  /*$('#save_pipeline a').click(function(){
+                    var country_reg_body = $('#country_reg_body').val();
+                    var pipeline_country = $('#pipeline_country').val();
+                    var approved_country = $('#approved_country').val();
+                    var estimated_approval = $('#country_reg_body').val();
+                    var estimated_launch = $('#country_reg_body').val();
+                    var device_class = $('#device_class').val();
+                    var AnalystNotes = $('#AnalystNotes').val();
+
+                    $('#pipeline_list tbody').append('<tr><td><input name="country_reg_body_'+curr_pipeline+'" type="text" value="'+country_reg_body+'"/></td><td><input name="pipeline_country_'+curr_pipeline+'" type="text" value="'+pipeline_country+'"/></td><td><input name="approved_country_'+curr_pipeline+'" type="text" value="'+approved_country+'"/></td><td><input name="estimated_approval_'+curr_pipeline+'" type="text" value="'+estimated_approval+'"/></td><td><input name="estimated_launch_'+curr_pipeline+'" type="text" value="'+estimated_launch+'"/></td><td><input name="device_class_'+curr_pipeline+'" type="text" value="'+device_class+'"/></td><td><input name="AnalystNotes_'+curr_pipeline+'" type="text" value="'+AnalystNotes+'"/></td><td class="del_pipelinedata"><img src="images/delete.png"/></td></tr>');
+                    curr_pipeline++;
+                  });*/
+
+                    $("#pipeline_list").on("click","img",function(){
+                    //alert('');
+                    $(this).parents().eq(1).remove();
+                  });
+
                     
                 });
 
