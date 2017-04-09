@@ -10,9 +10,9 @@
                 <input type="radio" name="prod_type_1" value="UniversityProduct"> University Product      
                 <input type="radio" name="prod_type_1" value="ProfiledProduct" required> Profiled  Product  
                 </div>
+                <div class="form_div"><label>Product Generic Name : </label><input type="text" name="generic_name" ></div>
                 <div class="form_div"><label>Product Brand Name : </label><input type="text" name="brand_name" id="brand_name" ></div>
                 <div class="form_div"><label>Product Alias Name : </label><input type="text" name="product_alias" ></div>
-                <div class="form_div"><label>Product Generic Name : </label><input type="text" name="generic_name" ></div>
                 <div class="form_div"><label>Product Classification : </label><input type="text" name="product_classification" id="product_classification"></div>
                 <div id='classification_list'>
                 </div>
@@ -20,6 +20,7 @@
                 <input type="radio" name="profile_status" value="Stub"> Stub 
                 <input type="radio" name="profile_status" value="Profile"> Profile 
                 </div>
+                <div style="display:none;" class="save-stub"><a href="javascript:void(0);">Save Stub Product</a></div>
 	        </section>
 	        <h3>Step 2</h3>
 	        <section>
@@ -177,7 +178,12 @@
                           <tr>
                             <td><input type="date" name="Milestonedate_1" ></td>
                             <td><input type="text" name="Milestonetitle_1" ></td>
-                            <td><input type="text" name="Milestonetype_1" ></td>
+                            <td>
+                                <select name="Milestonetype_1">
+                                  <option value="type1">Type1</option>
+                                  <option value="type2">Type2</option>
+                                </select>
+                            </td>
                           </tr>
                         </tbody>
                       </thead>
@@ -190,7 +196,9 @@
 	        <h3>Step 3</h3>
 	        <section>
 	            <div class="form_div"><label>Product Description: </label><textarea class="ckeditor" name="product_description"></textarea></div>
-                <div class="form_div"><label>Product Technology : </label><input type="text" name="product_technology" ></div>
+                <div class="form_div"><label>Product Technology : </label><input type="text" name="product_technology" id="product_technology" ></div>
+                <div id='technology_list'>
+                </div>
                 <div class="form_div"><label>Technology Description : </label><textarea class="ckeditor" name="technology_description"></textarea></div>
                 <div class="form_div"><label>Product Developing  : </label><input type="text" name="product_developing"></div>
                 <div class="form_div"><label>Development Partners Any : </label><input type="text" name="development_partners"></div>
@@ -274,9 +282,36 @@
                     $(this).parents().eq(1).remove();
                   });
 
+                  $("#product_technology").autocomplete({
+                      source: 'technology_search.php',
+                      select:function (event, ui) {
+                        //alert(ui.item.id);
+                        //alert(ui.item.label)
+                        $('#technology_list').append('<div id="technology'+ui.item.id+'">'+ui.item.label+'<input type="hidden" name="technologies[]" value="'+ui.item.id+'"><div class="del_technology"><img src="images/delete.png"/></div></div>')
+                      }
+                  }); 
+
+                  $("#technology_list").on("click","img",function(){
+                    //alert('');
+                    $(this).parents().eq(1).remove();
+                  });
+
                   $('#extra_milestone').click(function(){
-                    $('.milestone_entry').append('<tr><td><input type="date" name="Milestonedate_'+curr_milestone+'" ></td><td><input type="text" name="Milestonetitle_'+curr_milestone+'" ></td><td><input type="text" name="Milestonetype_'+curr_milestone+'" ></td></tr>');
+                    $('.milestone_entry').append('<tr><td><input type="date" name="Milestonedate_'+curr_milestone+'" ></td><td><input type="text" name="Milestonetitle_'+curr_milestone+'" ></td><td><select name="Milestonetype_'+curr_milestone+'"><option value="type1">Type1</option><option value="type2">Type2</option></select></td></tr>');
                     curr_milestone++;
+                  });
+
+                  $('input[name="profile_status"]').click(function(){
+                    if($(this).val() == 'Stub'){
+                      $('.save-stub').css('display','block');
+                    }
+                    else{
+                      $('.save-stub').css('display','none');
+                    }
+                  });
+
+                  $('.save-stub a').click(function(){
+                    $('#product_form').submit();
                   });
                     
                 });

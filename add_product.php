@@ -24,18 +24,18 @@ else{
 }
 
 //fetch product brand id
-$brand_sql = 'Select id from brand WHERE brand_name = "'.$_POST['brand_name'].'"';
+$brand_sql = 'Select brand_name from brand WHERE brand_name = "'.$_POST['brand_name'].'"';
 $brand = $conn->query($brand_sql);
 if($brand->num_rows > 0){
 	$brand_id = $brand->fetch_assoc();
-	$brand_id = $brand_id['id'];
-	$product_main['brand_id'] = $brand_id; 
+	$brand_id = $brand_id['brand_name'];
+	$product_main['brand_name'] = $brand_id; 
 }
 else{
 	$sql = "INSERT INTO brand (brand_name) VALUES ('".$_POST['brand_name']."')";
 	$conn->query($sql);
-	$brand_id = mysqli_insert_id($conn);
-	$product_main['brand_id'] = $brand_id; 
+	//$brand_id = mysqli_insert_id($conn);
+	$product_main['brand_name'] = $_POST['brand_name']; 
 }
 
 //fetch indication
@@ -82,8 +82,13 @@ $product_main['product_tech_description'] = $_POST['technology_description'];
 $product_main['product_specification'] = $_POST['product_specification'];
 $product_main['product_sources'] = $_POST['product_source'];
 
+//echo "dsvds";
+//print_r($product_main); die;
 //product main insert query  
-$product_insert = "INSERT INTO products (university_pipelined,alias_name ,generic_name,profile_status,pipelined_marketed,product_description,product_tech_description,product_specification,product_sources,company_id,brand_id,indication_id,application_id) VALUES ('".$product_main['university_pipelined']."','".$product_main['alias_name']."','".$product_main['generic_name']."','".$product_main['profile_status']."','".$product_main['pipelined_marketed']."','".$product_main['product_description']."','".$product_main['product_tech_description']."','".$product_main['product_specification']."','".$product_main['product_sources']."',".$product_main['company_id'].",".$product_main['brand_id'].",".$product_main['indication_id'].",".$product_main['application_id'].")";
+
+//echo "INSERT INTO products (university_pipelined,alias_name,generic_name,profile_status,pipelined_marketed,product_description,product_tech_description,product_specification,product_sources,company_id,brand_name,indication_id,application_id) VALUES ('".$product_main['university_pipelined']."','".$product_main['alias_name']."','".$product_main['generic_name']."','".$product_main['profile_status']."','".$product_main['pipelined_marketed']."','".$product_main['product_description']."','".$product_main['product_tech_description']."','".$product_main['product_specification']."','".$product_main['product_sources']."',".$product_main['company_id'].",".$product_main['brand_name'].",".$product_main['indication_id'].",".$product_main['application_id'].")";
+
+$product_insert = "INSERT INTO products (university_pipelined,alias_name,generic_name,profile_status,pipelined_marketed,product_description,product_tech_description,product_specification,product_sources,company_id,brand_name,indication_id,application_id) VALUES ('".$product_main['university_pipelined']."','".$product_main['alias_name']."','".$product_main['generic_name']."','".$product_main['profile_status']."','".$product_main['pipelined_marketed']."','".$product_main['product_description']."','".$product_main['product_tech_description']."','".$product_main['product_specification']."','".$product_main['product_sources']."',".$product_main['company_id'].",'".$product_main['brand_name']."',".$product_main['indication_id'].",".$product_main['application_id'].")";
 
 $conn->query($product_insert);
 $product_id = mysqli_insert_id($conn);
@@ -95,6 +100,15 @@ for($i = 0;$i<count($_POST['classifications']);$i++){
 
 $classification_insert = "INSERT INTO product_to_classification(product_id,product_classification_id) VALUES(".$classification['product_id'].",".$classification['product_classification_id'].")";
 $conn->query($classification_insert);
+
+}  
+
+for($j = 0;$j<count($_POST['technologies']);$j++){
+	$technology['product_id'] = $product_id;
+	$technology['product_technology_id'] = $_POST['technologies'][$j];
+
+$technology_insert = "INSERT INTO product_to_technology(product_id,product_technology_id) VALUES(".$technology['product_id'].",".$technology['product_technology_id'].")";
+$conn->query($technology_insert);
 
 }  
 

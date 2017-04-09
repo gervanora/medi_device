@@ -79,7 +79,7 @@ body{
 	min-width: 100px;
 }
 
-#classification_list{
+#classification_list,#technology_list{
 	background: white;
     padding: 10px;
     width: 75%;
@@ -88,11 +88,11 @@ body{
     margin-left: 270px;
 }
 
-.del_classification{
+.del_classification,.del_technology{
 	display: inline-block;
 }
 
-.del_classification img{
+.del_classification img,.del_technology img{
 	width:12px;
 }
 
@@ -101,4 +101,17 @@ body{
 	margin: 10px;
     height: 25px;
     width:90%;
+}
+
+.save-stub a{
+	background: #2184be;
+    color: #fff;
+    display: block;
+    padding: 0.5em 1em;
+    text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    width: 150px;
+    margin-left: 270px;
 }
