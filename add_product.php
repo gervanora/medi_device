@@ -5,7 +5,7 @@ echo "Below is the data you entered";
 echo "<pre>";
 print_r($_POST);
 echo "</pre>";
-die;
+
 $product_main = array();
 
 //fetch company id
@@ -121,16 +121,20 @@ while(!empty($_POST['Milestonetitle_'.$m])){
 }
 
 if($product_main['pipelined_marketed'] == "Markets"){
-	$markets_insert = "INSERT INTO market_product(product_id,approved_country_id,regulatory_body,510_num,pma_num,510_mod_num,pma_mod_num,submission_date,approval_date,launch_date) VALUES(".$product_id.",".$_POST['approved_country'].",'".$_POST['country_reg_body']."','".$_POST['510k_num']."','".$_POST['pma_num']."','".$_POST['510k_mod_num']."','".$_POST['pma_mod_num']."','".$_POST['submission_date']."','".$_POST['approval_date']."','".$_POST['launch_date']."')";
-	$conn->query($markets_insert);
+
+	foreach ($_POST['market_data'] as $market_data) {
+		//echo "INSERT INTO market_product(product_id,approved_country,regulatory_body,510_num,pma_num,510_mod_num,pma_mod_num,submission_date,approval_date,launch_date) VALUES(".$product_id.",".$market_data['approved_country'].",'".$market_data['country_reg_body']."','".$market_data['510k_num']."','".$market_data['pma_num']."','".$market_data['510k_mod_num']."','".$market_data['pma_mod_num']."','".$market_data['submission_date']."','".$market_data['approval_date']."','".$market_data['launch_date']."')";
+		$markets_insert = "INSERT INTO market_product(product_id,approved_country,regulatory_body,510_num,pma_num,510_mod_num,pma_mod_num,submission_date,approval_date,launch_date) VALUES(".$product_id.",'".$market_data['approved_country']."','".$market_data['country_reg_body']."','".$market_data['510k_num']."','".$market_data['pma_num']."','".$market_data['510k_mod_num']."','".$market_data['pma_mod_num']."','".$market_data['submission_date']."','".$market_data['approval_date']."','".$market_data['launch_date']."')";
+		$conn->query($markets_insert);
+	}
 }
 elseif ($product_main['pipelined_marketed'] == "Pipeline") {
-    $estimated_approval = $_POST['estimated_approval_year'].'-'.$_POST['estimated_approval_month'].'-01';
-    $estimated_launch = $_POST['estimated_launch_year'].'-'.$_POST['estimated_launch_month'].'-01';
-    //echo $estimated_approval; echo $estimated_launch;
-	//die;
-	$pipeline_insert = "INSERT INTO pipeline_product(product_id,country_reg_body,developing_country_id,approved_other,estimated_approval,estimated_launch,device_class,analyst_notes) VALUES(".$product_id.",'".$_POST['country_reg_body']."',".$_POST['pipeline_country'].",'".$_POST['approved_country']."','".$estimated_approval."','".$estimated_launch."','".$_POST['device_class']."','".$_POST['AnalystNotes']."')";
-	$conn->query($pipeline_insert);
+	foreach ($_POST['pipeline_data'] as $pipeline_data) {
+		$pipeline_data['estimated_approval'] = $pipeline_data['estimated_approval'].'-01';
+		$pipeline_data['estimated_launch'] = $pipeline_data['estimated_launch'].'-01';
+		$pipeline_insert = "INSERT INTO pipeline_product(product_id,country_reg_body,developing_country,approved_other,estimated_approval,estimated_launch,device_class,analyst_notes) VALUES(".$product_id.",'".$pipeline_data['country_reg_body']."','".$pipeline_data['pipeline_country']."','".$pipeline_data['approved_country']."','".$pipeline_data['estimated_approval']."','".$pipeline_data['estimated_launch']."','".$pipeline_data['device_class']."','".$pipeline_data['AnalystNotes']."')";
+		$conn->query($pipeline_insert);
+	}
 }
 
 ?>

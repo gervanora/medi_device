@@ -39,6 +39,8 @@ $result = $conn->query($sql);
               <option value="Market Level">Market Level</option>
               <option value="Segment Level">Segment Level</option>
               <option value="Sub Segment Level">Sub Segment Level</option>
+              <option value="Nodes">Nodes</option>
+              <option value="Sub-Nodes">Sub-Nodes</option>
             </select>
             </div>
         <input type="submit" value="Add Classification">

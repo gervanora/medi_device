@@ -159,29 +159,29 @@
 
                 <div class="form_div">
                   <label>Approved Country: </label>
-                    <select name='approved_country'>
+                    <select id='approved_country'>
                       <?php foreach($countries as $country) { ?>
-                        <option value="<?php echo $country[0]; ?>"><?php echo $country[2]; ?></option>
+                        <option value="<?php echo $country[2]; ?>"><?php echo $country[2]; ?></option>
                     <?php } ?>
                     </select>
                 </div>
 
                 <div class="form_div">
                     <label>Concern Regulatory body : </label>
-                    <select id="CRbody" onChange="myFunction()" name="country_reg_body">
+                    <select onChange="myFunction()" id="country_reg_body">
                       <option value="select">select</option>
                       <option value="510k">510k</option>
                       <option value="PMA">PMA</option>
                       <option value="CE">CE</option>
                     </select>
                 </div>
-                  <div class="form_div"><label>510K Number : </label><input type="text" name="510k_num"></div>
-                  <div class="form_div"><label>PMA Number : </label><input type="text" name="pma_num"></div>
-                  <div class="form_div"><label>Submission date : </label><input type="date" name="submission_date" ></div>
-                  <div class="form_div"><label>Approval Date  : </label><input type="date" name="approval_date" ></div>
-                  <div class="form_div"><label>Product launch date : </label><input type="date" name="launch_date" ></div>
-                  <div class="form_div"><label>510K Modification No.  : </label><input type="text" name="510k_mod_num" > </div>
-                  <div class="form_div"><label>PMA Modification No.  : </label><input type="text" name="pma_mod_num" > </div>
+                  <div class="form_div"><label>510K Number : </label><input type="text" id="510k_num"></div>
+                  <div class="form_div"><label>PMA Number : </label><input type="text" id="pma_num"></div>
+                  <div class="form_div"><label>Submission date : </label><input type="date" id="submission_date" ></div>
+                  <div class="form_div"><label>Approval Date  : </label><input type="date" id="approval_date" ></div>
+                  <div class="form_div"><label>Product launch date : </label><input type="date" id="launch_date" ></div>
+                  <div class="form_div"><label>510K Modification No.  : </label><input type="text" id="510k_mod_num" > </div>
+                  <div class="form_div"><label>PMA Modification No.  : </label><input type="text" id="pma_mod_num" > </div>
                   <div id="save_marketed">
                     <a href="javascript:void(0);">Save</a>
                   </div>
@@ -255,6 +255,7 @@
     <script type="text/javascript">
             var curr_milestone = 2;
             var curr_pipeline = 0;
+            var curr_marketed = 0;
             var form = $("#product_form");
                 form.validate({
                     errorPlacement: function errorPlacement(error, element) { element.before(error); },
@@ -359,8 +360,8 @@
                     var country_reg_body = $('#country_reg_body').val();
                     var pipeline_country = $('#pipeline_country').val();
                     var approved_country = $('#approved_country').val();
-                    var estimated_approval = $('#country_reg_body').val();
-                    var estimated_launch = $('#country_reg_body').val();
+                    var estimated_approval = $('#estimated_approval_year').val()+'-'+$('#estimated_approval_month').val();
+                    var estimated_launch = $('#estimated_launch_year').val()+'-'+$('#estimated_launch_month').val();
                     var device_class = $('#device_class').val();
                     var AnalystNotes = $('#AnalystNotes').val();
 
@@ -368,20 +369,27 @@
                     curr_pipeline++;
                   });
 
-                  /*$('#save_pipeline a').click(function(){
-                    var country_reg_body = $('#country_reg_body').val();
-                    var pipeline_country = $('#pipeline_country').val();
+                   $('#save_marketed a').click(function(){
                     var approved_country = $('#approved_country').val();
-                    var estimated_approval = $('#country_reg_body').val();
-                    var estimated_launch = $('#country_reg_body').val();
-                    var device_class = $('#device_class').val();
-                    var AnalystNotes = $('#AnalystNotes').val();
+                    var country_reg_body = $('#country_reg_body').val();
+                    var k_num = $('#510k_num').val();
+                    var pma_num = $('#pma_num').val();
+                    var submission_date = $('#submission_date').val();
+                    var approval_date = $('#approval_date').val();
+                    var launch_date = $('#launch_date').val();
+                    var k_mod_num = $('#510k_mod_num').val();
+                    var pma_mod_num = $('#pma_mod_num').val();
 
-                    $('#pipeline_list tbody').append('<tr><td><input name="country_reg_body_'+curr_pipeline+'" type="text" value="'+country_reg_body+'"/></td><td><input name="pipeline_country_'+curr_pipeline+'" type="text" value="'+pipeline_country+'"/></td><td><input name="approved_country_'+curr_pipeline+'" type="text" value="'+approved_country+'"/></td><td><input name="estimated_approval_'+curr_pipeline+'" type="text" value="'+estimated_approval+'"/></td><td><input name="estimated_launch_'+curr_pipeline+'" type="text" value="'+estimated_launch+'"/></td><td><input name="device_class_'+curr_pipeline+'" type="text" value="'+device_class+'"/></td><td><input name="AnalystNotes_'+curr_pipeline+'" type="text" value="'+AnalystNotes+'"/></td><td class="del_pipelinedata"><img src="images/delete.png"/></td></tr>');
-                    curr_pipeline++;
-                  });*/
+                    $('#marketed_list tbody').append('<tr><td><input name="market_data['+curr_marketed+'][approved_country]" type="text" value="'+approved_country+'"/></td><td><input name="market_data['+curr_marketed+'][country_reg_body]" type="text" value="'+country_reg_body+'"/></td><td><input name="market_data['+curr_marketed+'][510k_num]" type="text" value="'+k_num+'"/></td><td><input name="market_data['+curr_marketed+'][pma_num]" type="text" value="'+pma_num+'"/></td><td><input name="market_data['+curr_marketed+'][submission_date]" type="text" value="'+submission_date+'"/></td><td><input name="market_data['+curr_marketed+'][approval_date]" type="text" value="'+approval_date+'"/></td><td><input name="market_data['+curr_marketed+'][launch_date]" type="text" value="'+launch_date+'"/></td><td><input name="market_data['+curr_marketed+'][510k_mod_num]" type="text" value="'+k_mod_num+'"/></td><td><input name="market_data['+curr_marketed+'][pma_mod_num]" type="text" value="'+pma_mod_num+'"/></td><td class="del_marketdata"><img src="images/delete.png"/></td></tr>');
+                    curr_marketed++;
+                  });
 
                     $("#pipeline_list").on("click","img",function(){
+                    //alert('');
+                    $(this).parents().eq(1).remove();
+                  });
+
+                    $("#marketed_list").on("click","img",function(){
                     //alert('');
                     $(this).parents().eq(1).remove();
                   });

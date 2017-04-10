@@ -135,10 +135,18 @@ body{
     margin-bottom:20px;
 }
 
-.del_pipelinedata img{
+.del_pipelinedata img,.del_marketdata img{
     width:12px;
 }
 
 .del_pipelinedata{
+    text-align: center;
+}
+
+#marketed_list input{
+    width:100px;
+}
+
+#marketed_list td{
     text-align: center;
 }
