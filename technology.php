@@ -22,6 +22,7 @@ $result = $conn->query($sql);
 		    <thead>
 			  <td>Sr. no.</td>
 			  <td>Technology Name</td>
+			  <td>&nbsp;</td>
 			</thead>
 			<tbody>
              <?php if ($result->num_rows > 0) {
@@ -30,6 +31,7 @@ $result = $conn->query($sql);
 				<tr>
 					<td><?php echo $row['id']; ?></td>
 					<td><?php echo $row['technology']; ?></td>
+					<td style="text-align:center;"><a href="delete.php?type=technology&id=<?php echo $row['id']; ?>"><img src="images/delete.png"/></a></td>
 				</tr>
 			 <?php	}
 				}

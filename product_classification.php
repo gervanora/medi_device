@@ -54,6 +54,7 @@ $result = $conn->query($sql);
         <td>Classification Name</td>
         <td>Classification Full Path</td>
         <td>Level</td>
+        <td>&nbsp;</td>
       </thead>
       <tbody>
              <?php if ($result->num_rows > 0) {
@@ -64,6 +65,7 @@ $result = $conn->query($sql);
           <td><?php echo $row['classification_name']; ?></td>
           <td><?php echo $row['classification_fullname']; ?></td>
           <td><?php echo $row['level']; ?></td>
+          <td style="text-align:center;"><a href="delete.php?type=classification&id=<?php echo $row['id']; ?>"><img src="images/delete.png"/></a></td>
         </tr>
        <?php  }
         }

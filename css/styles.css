@@ -150,3 +150,7 @@ body{
 #marketed_list td{
     text-align: center;
 }
+
+.listings td img,.classification_listing td img{
+    width:12px;
+}
