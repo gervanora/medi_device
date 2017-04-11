@@ -154,3 +154,16 @@ body{
 .listings td img,.classification_listing td img{
     width:12px;
 }
+
+.login_form{
+    text-align: center;
+    width: 500px;
+    margin: 0 420px;
+    border: 1px solid;
+    padding: 10px;
+}
+
+.login_form input[type="password"] {
+    width: 400px;
+    height: 25px;
+}

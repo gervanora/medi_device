@@ -18,22 +18,10 @@
         <div class='admin_menu'>
         	<ul>
         		<li><a href="index.php">Home</a></li>
-	        	<li><a href="addproduct_form.php">Add Products</a></li>
-	        	<li><a href="list_products.php">List Products</a></li>
-				<li><a href="companies.php">Companies</a></li>
-				<li><a href="brand.php">Brands</a></li>
-				<li><a href="product_classification.php">Product Classifications</a></li>
-				<li><a href="technology.php">Product Technology</a></li>
-				<li><a href="indication.php">Indication</a></li>
-				<li><a href="application.php">Application</a></li>
-				<li><a href="logout.php">Logout</a></li>
+				<li><a href="login.php">Login</a></li>
 			</ul>
 		</div>
 	 	</div>
 <?php include 'db_config.php'; 
 	  session_start();
-	  //print_r($_SERVER['REQUEST_URI']); die;
-	  if(empty($_SESSION['token']) && $_SERVER['REQUEST_URI'] != '/medi_device/index.php'){
-	  	header("Location: /medi_device/login.php");
-	  }
 ?>
