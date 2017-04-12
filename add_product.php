@@ -1,10 +1,9 @@
 <?php 
 include 'includes/header.php';
-echo "Below is the data you entered";
-
-echo "<pre>";
+//echo "Below is the data you entered";
+/*echo "<pre>";
 print_r($_POST);
-echo "</pre>";
+echo "</pre>";*/
 
 $product_main = array();
 
@@ -53,7 +52,7 @@ else{
 	$product_main['indication_id'] = $indication_id; 
 }
 
-//fetch indication
+//fetch application
 $application_sql = 'Select id from application WHERE application = "'.$_POST['application'].'"';
 $application = $conn->query($application_sql);
 if($application->num_rows > 0){
@@ -82,13 +81,21 @@ $product_main['product_tech_description'] = $_POST['technology_description'];
 $product_main['product_specification'] = $_POST['product_specification'];
 $product_main['product_sources'] = $_POST['product_source'];
 
+$product_main['user_id'] = $_SESSION['user_id'];
+$product_main['approval_status'] = 0;
+$product_main['created'] = date('Y-m-d H:i:s');
+$product_main['modified'] = date('Y-m-d H:i:s');
+
+$product_main['product_developing'] = $_POST['product_developing'];
+$product_main['development_partners'] = $_POST['development_partners'];
+
 //echo "dsvds";
 //print_r($product_main); die;
 //product main insert query  
 
 //echo "INSERT INTO products (university_pipelined,alias_name,generic_name,profile_status,pipelined_marketed,product_description,product_tech_description,product_specification,product_sources,company_id,brand_name,indication_id,application_id) VALUES ('".$product_main['university_pipelined']."','".$product_main['alias_name']."','".$product_main['generic_name']."','".$product_main['profile_status']."','".$product_main['pipelined_marketed']."','".$product_main['product_description']."','".$product_main['product_tech_description']."','".$product_main['product_specification']."','".$product_main['product_sources']."',".$product_main['company_id'].",".$product_main['brand_name'].",".$product_main['indication_id'].",".$product_main['application_id'].")";
 
-$product_insert = "INSERT INTO products (university_pipelined,alias_name,generic_name,profile_status,pipelined_marketed,product_description,product_tech_description,product_specification,product_sources,company_id,brand_name,indication_id,application_id) VALUES ('".$product_main['university_pipelined']."','".$product_main['alias_name']."','".$product_main['generic_name']."','".$product_main['profile_status']."','".$product_main['pipelined_marketed']."','".$product_main['product_description']."','".$product_main['product_tech_description']."','".$product_main['product_specification']."','".$product_main['product_sources']."',".$product_main['company_id'].",'".$product_main['brand_name']."',".$product_main['indication_id'].",".$product_main['application_id'].")";
+$product_insert = "INSERT INTO products (university_pipelined,alias_name,generic_name,profile_status,pipelined_marketed,product_description,product_tech_description,product_specification,product_sources,company_id,brand_name,indication_id,application_id,user_id,approval_status,created,modified,product_developing,development_partners) VALUES ('".$product_main['university_pipelined']."','".$product_main['alias_name']."','".$product_main['generic_name']."','".$product_main['profile_status']."','".$product_main['pipelined_marketed']."','".$product_main['product_description']."','".$product_main['product_tech_description']."','".$product_main['product_specification']."','".$product_main['product_sources']."',".$product_main['company_id'].",'".$product_main['brand_name']."',".$product_main['indication_id'].",".$product_main['application_id'].",".$product_main['user_id'].",".$product_main['approval_status'].",'".$product_main['created']."','".$product_main['modified']."','".$product_main['product_developing']."','".$product_main['development_partners']."')";
 
 $conn->query($product_insert);
 $product_id = mysqli_insert_id($conn);
@@ -137,30 +144,6 @@ elseif ($product_main['pipelined_marketed'] == "Pipeline") {
 	}
 }
 
-?>
-<div>
-	<strong>Product Information</strong>
-	<div>Company name:</div>
-	<div>Product type:</div>
-	<div>Brand name:</div>
-	<div>Alias name:</div>
-	<div>Generic name:</div>
-	<div>Product Classification:</div>
-	<div>Profile Status:</div>
-	<div>Product Type:</div>
-	<div>Product Milestones:</div>
-	<div>Product Description:</div>
-	<div>Product Technology:</div>
-	<div>Technology Description:</div>
-	<div>Product Developing:</div>
-	<div>Developing Partners:</div>
-	<div>Indication:</div>
-	<div>Application:</div>
-	<div>Product Specification:</div>
-	<div>Product Sources:</div>
-</div>
-
-<?php
-die;
+header("Location: /medi_device/view_product.php?id=".$product_id); 
 ?>
 <?php include 'includes/footer.php'; ?>

@@ -240,8 +240,8 @@
                 <div id='technology_list'>
                 </div>
                 <div class="form_div"><label>Technology Description : </label><textarea class="ckeditor" name="technology_description"></textarea></div>
-                <div class="form_div"><label>Product Developing  : </label><input type="text" name="product_developing"></div>
-                <div class="form_div"><label>Development Partners Any : </label><input type="text" name="development_partners"></div>
+                <div class="form_div"><label>Product Developing  : </label><input type="text" name="product_developing" id="product_developing"></div>
+                <div class="form_div"><label>Development Partners Any : </label><input type="text" name="development_partners" id="development_partners"></div>
           </section>
           <h3>Step 4</h3>
           <section>
@@ -281,7 +281,7 @@
                     },
                     onFinished: function (event, currentIndex)
                     {
-                        alert("Submitted!");
+                        //alert("Submitted!");
                         $('#product_form').submit();
                     }
                 });
@@ -295,6 +295,14 @@
                     });
 
                     $("#company_name").autocomplete({
+                        source: 'company_search.php'
+                    });
+
+                    $("#product_developing").autocomplete({
+                        source: 'company_search.php'
+                    });
+
+                    $("#development_partners").autocomplete({
                         source: 'company_search.php'
                     });
 
