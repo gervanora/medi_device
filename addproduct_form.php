@@ -35,10 +35,10 @@
                   <div class="form_div">
                     <label>Country Specific Regulatory Bodies: </label>
                     <select onChange="myFunction()" id="country_reg_body">
-                      <option value="select">select</option>
-                      <option value="510k">510k</option>
-                      <option value="PMA">PMA</option>
-                      <option value="CE">CE</option>
+                      <option value="">select</option>
+                      <?php foreach ($reg_bodies as $reg_body) { ?>
+                        <option value="<?php echo $reg_body[1]; ?>"><?php echo $reg_body[1]; ?></option> 
+                      <?php } ?>    
                     </select>
                   </div>
                   <div class="form_div">
@@ -126,8 +126,10 @@
                   <div class="form_div">
                     <label>Device Class: </label>
                     <select id="device_class">
-                      <option value="select">select</option>
-                      <option value="device_class-1">test device class</option>
+                      <option value="">select</option>
+                      <?php foreach ($reg_classes as $reg_class) { ?>
+                        <option value="<?php echo $reg_class[1]; ?>"><?php echo $reg_class[1]; ?></option> 
+                      <?php } ?> 
                     </select>
                   </div>
                   <div class="form_div">
@@ -170,9 +172,9 @@
                     <label>Concern Regulatory body : </label>
                     <select onChange="myFunction()" id="country_reg_body">
                       <option value="select">select</option>
-                      <option value="510k">510k</option>
-                      <option value="PMA">PMA</option>
-                      <option value="CE">CE</option>
+                      <?php foreach ($reg_bodies as $reg_body) { ?>
+                        <option value="<?php echo $reg_body[1]; ?>"><?php echo $reg_body[1]; ?></option> 
+                      <?php } ?> 
                     </select>
                 </div>
                   <div class="form_div"><label>510K Number : </label><input type="text" id="510k_num"></div>
