@@ -167,3 +167,31 @@ body{
     width: 400px;
     height: 25px;
 }
+
+.product_view{
+    background: #eee;
+    padding:20px;
+}
+
+.product_view h3{
+    text-align: center;
+}
+
+.product_view div{
+    padding: 10px 0;
+    text-align: center;
+}
+
+.product_view #brand_name{
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.product_view #company_name{
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+#milestones table{
+    width: 100%
+}

@@ -20,18 +20,15 @@
 	}
 
 ?>
-<div class="content">
-	<h3>Product View Page</h3>
-	<div><?php echo $data['brand_name']; ?></div>
-	<div><?php echo $data['company_name']; ?></div>
-	<div><?php echo $data['development_partners']; ?></div>
+<div class="content product_view">
+	<h3>Product Details</h3>
+	<div id="brand_name"><?php echo $data['brand_name']; ?></div>
+	<div id='company_name'><?php echo $data['company_name']; ?></div>
+	<div id="dev_partner"><?php echo $data['development_partners']; ?></div>
 	<?php if(!empty($classification_data)){ ?>
-	<div>
+	<div id="taxonomies">
 		<strong>Taxonomy</strong>
-		<table border="1" width="100%">
-			<thead>
-				<td>&nbsp;</td>
-			</thead>
+		<table width="100%">
 			<tbody>
 				<?php foreach ($classification_data as $classification) { ?>
 					<tr>
@@ -43,9 +40,9 @@
 	</div>
 	<?php } ?>
 	<?php if(!empty($milestone_data)){ ?>
-	<div>
+	<div id="milestones">
 		<strong>Milestones</strong>
-		<table border="1" width="100%">
+		<table border="1">
 			<thead>
 				<td>Title</td>
 				<td>Type</td>
@@ -56,18 +53,18 @@
 					<tr>
 						<td><?php echo $milestone[2]; ?></td>
 						<td><?php echo $milestone[4]; ?></td>
-						<td><?php echo $milestone[3]; ?></td>
+						<td><?php echo date('d/m/Y',strtotime($milestone[3])); ?></td>
 					</tr>
 				<?php } ?>
 			</tbody>
 		</table>
 	</div>
 	<?php } ?>
-	<div><?php echo $data['product_description']; ?></div>
+	<div id="product_description"><?php echo $data['product_description']; ?></div>
     <div>Technologies</div>
-    <div><?php echo $data['product_tech_description']; ?></div>
-    <div><?php echo $data['product_specification']; ?></div>
-    <div><?php echo $data['product_sources']; ?></div>
+    <div id="product_tech_description"><?php echo $data['product_tech_description']; ?></div>
+    <div id="prod_specification"><?php echo $data['product_specification']; ?></div>
+    <div id="product_sources"><?php echo $data['product_sources']; ?></div>
 </div>
 
 <?php include 'includes/footer.php'; ?>
