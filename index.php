@@ -61,6 +61,26 @@
 		    $conditions[] = 'products.id IN('.$market_product_list['market_product'].')';
 		}
 
+		if(!empty($_POST['510_num'])){
+			$num_query = "SELECT GROUP_CONCAT(product_id) as num_product FROM `market_product` WHERE 510_num = '".$_POST['510_num']."'";
+		    //echo $num_query;
+		    $num_res = $conn->query($num_query);
+		    $num_product_list = $num_res->fetch_assoc();
+		    if(!empty($num_product_list['num_product'])){
+		    	$conditions[] = 'products.id IN('.$num_product_list['num_product'].')';
+		    } 
+		}
+
+		if(!empty($_POST['pma_num'])){
+			$pma_query = "SELECT GROUP_CONCAT(product_id) as pma_product FROM `market_product` WHERE pma_num = '".$_POST['pma_num']."'";
+		    //echo $pma_query;
+		    $pma_res = $conn->query($pma_query);
+		    $pma_product_list = $pma_res->fetch_assoc();
+		    if(!empty($pma_product_list['pma_product'])){
+		    	$conditions[] = 'products.id IN('.$pma_product_list['pma_product'].')';
+		    } 
+		}
+
         //echo "<pre>";
 		//print_r($conditions);
 		//echo "</pre>";
