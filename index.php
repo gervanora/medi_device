@@ -7,7 +7,7 @@
 	if(!empty($_POST)){
 
         $conditions = array();
-		$sql = "Select products.*,company.company_name FROM products LEFT JOIN company on products.company_id = company.id";
+		$sql = "Select products.*,company.company_name,users.username FROM products LEFT JOIN company on products.company_id = company.id LEFT JOIN users ON products.user_id = users.id";
 
 		if(!empty($_POST['product_name'])){
 			$conditions[] = "brand_name  LIKE '%".$_POST['product_name']."%'";
@@ -20,8 +20,6 @@
 		if(!empty($_POST['author'])){
 			$conditions[] = "products.user_id = ".$_POST['author']." ";
 		}
-
-		//created to and from
 
         if(!empty($_POST['product_type'])){
 			//$conditions[] = "products.user_id = ".$_POST['author']." ";
@@ -37,6 +35,16 @@
 			}
 		}
 
+		if(!empty($_POST['created_from']) && !empty($_POST['created_to'])){
+			$conditions[] = "DATE(products.created) BETWEEN '".$_POST['created_from']."' AND '".$_POST['created_to']."'";
+		}
+		elseif (!empty($_POST['created_from'])) {
+			$conditions[] = "DATE(products.created) > '".$_POST['created_from']."'";
+		}
+		elseif (!empty($_POST['created_to'])) {
+			$conditions[] = "DATE(products.created) < '".$_POST['created_to']."'";
+		}
+
 
 
         echo "<pre>";
@@ -46,12 +54,12 @@
 		if(!empty($conditions)){
 			$sql = $sql." WHERE ".implode(" AND ", $conditions);
 		}
-		//echo $sql;
+		echo $sql;
 		$result = $conn->query($sql);
 	}
 	else{
 			//fetch all products
-			$sql = "Select products.*,company.company_name FROM products LEFT JOIN company on products.company_id = company.id";
+			$sql = "Select products.*,company.company_name,users.username FROM products LEFT JOIN company on products.company_id = company.id LEFT JOIN users ON products.user_id = users.id";
 			$result = $conn->query($sql);
 	}
 ?>
@@ -104,7 +112,7 @@
 
  <tr class="div_label">
         <td colspan=2 width=50%>
-               <div><label>Created Date:	</label>
+               <div><label>Created Date: FROM </label>
 <input type="date"  name="created_from">
 </div>
 		
@@ -179,8 +187,10 @@
 			  <td>Product Name</td>
 			  <td>Status</td>
 			  <td>Company</td>
+			  <td>Author</td>
               <td>&nbsp;</td>
               <td>Approval status</td>
+              <td>Last Modified Date</td>
               <td>&nbsp;</td>
 			</thead>
 			<tbody>
@@ -204,12 +214,14 @@
 						?>
 					</td>
 					<td><?php echo $row['company_name']; ?></td>
+					<td><?php echo $row['username']; ?></td>
 					<td><a href="view_product.php?id=<?php echo $row['id']; ?>">View</a></td>
 					<td>
 					<?php 
 					      echo ($row['approval_status']) ? 'Approved':'Pending';
                     ?>
 					</td>
+					<td><?php echo date('d/m/Y H:i:s',strtotime($row['modified'])); ?></td>
 					<td>....</td>
 				</tr>
 			 <?php	}
