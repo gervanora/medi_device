@@ -6,6 +6,8 @@
 
 	if(!empty($_POST)){
 
+		//print_r($_POST);
+
         $conditions = array();
 		$sql = "Select products.*,company.company_name,users.username FROM products LEFT JOIN company on products.company_id = company.id LEFT JOIN users ON products.user_id = users.id";
 
@@ -45,60 +47,72 @@
 			$conditions[] = "DATE(products.created) < '".$_POST['created_to']."'";
 		}
 
+		if(!empty($_POST['product_technology']) && !empty($_POST['technology_id'])){
+			$tecnology_query = "SELECT GROUP_CONCAT(product_id) as tech_product FROM `product_to_technology` WHERE product_technology_id = ".$_POST['technology_id'];
+		    $techology_res = $conn->query($tecnology_query);
+		    $tech_product_list = $techology_res->fetch_assoc();
+		    $conditions[] = 'products.id IN('.$tech_product_list['tech_product'].')';
+		}
 
+		if(!empty($_POST['market_level']) && !empty($_POST['market_level_id'])){
+			$market_query = "SELECT GROUP_CONCAT(product_id) as market_product FROM `product_to_classification` WHERE product_classification_id = ".$_POST['market_level_id'];
+		    $market_res = $conn->query($market_query);
+		    $market_product_list = $market_res->fetch_assoc();
+		    $conditions[] = 'products.id IN('.$market_product_list['market_product'].')';
+		}
 
-        echo "<pre>";
-		print_r($conditions);
-		echo "</pre>";
+        //echo "<pre>";
+		//print_r($conditions);
+		//echo "</pre>";
 		
 		if(!empty($conditions)){
 			$sql = $sql." WHERE ".implode(" AND ", $conditions);
 		}
-		echo $sql;
+		//echo $sql;
 		$result = $conn->query($sql);
 	}
 	else{
 			//fetch all products
 			$sql = "Select products.*,company.company_name,users.username FROM products LEFT JOIN company on products.company_id = company.id LEFT JOIN users ON products.user_id = users.id";
 			$result = $conn->query($sql);
+		//echo $sql;
 	}
 ?>
-		<div  class="content" align="left">
-			<h3>Search Form</h3>
-			<form method="POST" action="">
+<div  class="content" align="left">
+	<h3>Search Form</h3>
+	<form method="POST" action="">
 <table class="div_label">
  <tr class="div_label">
-    <td width=25%>
+    <td>
 	
 		<div>
 			<label>Product Name</label>
 		</div>
 	</td>
-    <td width=25%>	
+    <td>	
 		<div>
 			<input type="text" name="product_name" id="product_name"/>
 		</div>
 	</td >
-	<td width=25%> &nbsp;</td>
-	<td width=25%> &nbsp;</td>
+	<td> &nbsp;</td>
+	<td> &nbsp;</td>
  </tr>
  <tr class="div_label">
 		<td>
-	
-                <div ><label>Company Name</label></div>
+			<div ><label>Company Name</label></div>
 		</td>
-		<td width=25%>	
+		<td>	
 				<div><input type="text" name="company_name" id="company_name"/></div>
 		</td>		
-		<td width=25%> &nbsp;</td>
-	<td width=25%> &nbsp;</td>
+		<td> &nbsp;</td>
+		<td> &nbsp;</td>
  </tr>
  <tr class="div_label">
-    <td width=25%>
+    <td>
 		
                 <div ><label>Author</label></div>
     </td>
-    <td width=25%>
+    <td>
 				<select name="author">
                 	        <option value=""></option>
                 		<?php while($row = $authors_list->fetch_assoc()) { ?>
@@ -106,56 +120,58 @@
                 		<?php } ?>
                 	</select>
 		</td>	
-	<td width=25%> &nbsp;</td>
-	<td width=25%> &nbsp;</td>
+	<td> &nbsp;</td>
+	<td> &nbsp;</td>
  </tr>	
 
  <tr class="div_label">
-        <td colspan=2 width=50%>
+        <td colspan=2>
                <div><label>Created Date: FROM </label>
-<input type="date"  name="created_from">
-</div>
-		
+				<input type="date"  name="created_from">
+				</div>				
 	</td>
-	<td colspan=2>To  <input type="date" name="created_to"></td>
-		
+	<td colspan=2><div>
+				<label>To  </label><input type="date" name="created_to">
+				</div>
+	</td>
  </tr>
  <tr class="div_label">
-		<td width=25%>                
+		<td>                
 			<div>
                 		pipeline<input name="product_type" type="radio" value="pipeline">
 			</div>
 		</td>
-		<td width=25%>  
+		<td>  
 		 	<div>
                 		marketed<input name="product_type" type="radio" value="marketed">
 			</div>
 		</td>
-		<td width=25%>  
+		<td>  
 			<div>
                 		stub<input name="product_type" type="radio" value="stub">
 
                 	</div>
 		</td>
-	<td width=25%> &nbsp;</td>
+	<td> &nbsp;</td>
  </tr>
 
   <tr class="div_label">
-    <td width=25%>
+    <td>
             <label>Technology</label>
 
 	</td>
-	<td width=25%>
+	<td>
             <input type="text" name="product_technology" id="product_technology">
-                
+            <input type="hidden" name="technology_id" id="technology_id" value="">       
 	</td>
 </tr>
 <tr class="div_label">
-	<td width=25%>
+	<td>
     	<label>Market Level</label>
 	</td>
-	<td>
-		<input type="text" name="market_level" id="market_level">
+	<td colspan="3">
+		<input type="text" name="market_level" id="market_level" style="width:360px;">
+		<input type="hidden" name="market_level_id" id="market_level_id" value="">
 	</td>
 </tr>
 
@@ -242,11 +258,17 @@
             });
 
 		$("#product_technology").autocomplete({
-            source: 'technology_search.php',        
+            source: 'technology_search.php',
+            select:function (event, ui) {
+                $('#technology_id').val(ui.item.id);
+              }        
         }); 
 
         $("#market_level").autocomplete({
 	          source: 'search_classification.php',
+	          select:function (event, ui) {
+                $('#market_level_id').val(ui.item.id);
+              }
 	      });
 
 	});
