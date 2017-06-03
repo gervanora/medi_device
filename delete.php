@@ -6,6 +6,11 @@
 	}
 	else{
 		switch ($_GET['type']) {
+			case 'product':
+				$del_sql = 'Delete FROM products WHERE id='.$_GET['id'];
+				$conn->query($del_sql); 
+				header("Location: /medi_device/index.php"); 
+				break;
 			case 'company':
 				$del_sql = 'Delete FROM company WHERE id='.$_GET['id'];
 				$conn->query($del_sql); 

@@ -81,6 +81,10 @@
 		    } 
 		}
 
+		if(!empty($_POST['function_data'])){
+			$conditions[] = "function_data  LIKE '%".$_POST['function_data']."%'";
+		}
+
         //echo "<pre>";
 		//print_r($conditions);
 		//echo "</pre>";
@@ -207,9 +211,13 @@
 	<td width=25%><div><input type="text" name="pma_num"/></div></td>
 </tr>
 <tr>
-        <td width=25%><input type="submit" value="Search"></td>
-				
-				
+    <td width=25%><div><label>Function</label></div></td>
+	<td>
+		<input type="text" name="function_data">
+	</td>
+</tr>
+<tr class="div_label">
+        <td width=25%><input type="submit" value="Search"></td>			
 </tr>
 </table>
 			</form>
@@ -258,7 +266,7 @@
                     ?>
 					</td>
 					<td><?php echo date('d/m/Y H:i:s',strtotime($row['modified'])); ?></td>
-					<td>....</td>
+					<td><a href="delete.php?type=product&id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
 				</tr>
 			 <?php	}
 				}

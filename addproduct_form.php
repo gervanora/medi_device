@@ -44,6 +44,7 @@
                   <div class="form_div">
                     <label>Developing Country(Pipeline Territory): </label>
                     <select id='pipeline_country'>
+                        <option value=""></option>
                       <?php foreach($countries as $country) { ?>
                         <option value="<?php echo $country[2]; ?>"><?php echo $country[2]; ?></option>
                     <?php } ?>
@@ -52,6 +53,7 @@
                   <div class="form_div">
                     <label>Approved in other regions: </label>
                     <select id="approved_country">
+                      <option value=""></option>
                       <?php foreach($countries as $country) { ?>
                         <option value="<?php echo $country[2]; ?>"><?php echo $country[2]; ?></option>
                     <?php } ?>
@@ -162,6 +164,7 @@
                 <div class="form_div">
                   <label>Approved Country: </label>
                     <select id='approved_country'>
+                      <option value=""></option>
                       <?php foreach($countries as $country) { ?>
                         <option value="<?php echo $country[2]; ?>"><?php echo $country[2]; ?></option>
                     <?php } ?>
@@ -238,6 +241,7 @@
           <h3>Step 3</h3>
           <section>
               <div class="form_div"><label>Product Description: </label><textarea class="ckeditor" name="product_description"></textarea></div>
+              <div class="form_div"><label>Function: </label><input type="text" name="function_data" id="function_data"></div>
                 <div class="form_div"><label>Product Technology : </label><input type="text" name="product_technology" id="product_technology" ></div>
                 <div id='technology_list'>
                 </div>
