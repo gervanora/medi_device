@@ -103,14 +103,9 @@
 	}
 ?>
 <div  class="content" align="left">
-<table class="div_label">
-    <td>
-		<div>
 	<h3>Search Form</h3>
-			</div>
-	</td>
 	<form method="POST" action="">
-
+<table class="div_label">
  <tr class="div_label">
     <td>
 	
@@ -154,9 +149,8 @@
  </tr>	
 
  <tr class="div_label">
-        <td colspan=1>
-               <div><label>Created Date: </label></div></td>
-	<td><div><label>From </label>
+        <td colspan=2>
+               <div><label>Created Date: FROM </label>
 				<input type="date"  name="created_from">
 				</div>				
 	</td>
@@ -168,17 +162,17 @@
  <tr class="div_label">
 		<td>                
 			<div>
-                		Pipeline<input name="product_type" type="radio" value="pipeline">
+                		pipeline<input name="product_type" type="radio" value="pipeline">
 			</div>
 		</td>
 		<td>  
 		 	<div>
-                		Marketed<input name="product_type" type="radio" value="marketed">
+                		marketed<input name="product_type" type="radio" value="marketed">
 			</div>
 		</td>
 		<td>  
 			<div>
-                		Stub<input name="product_type" type="radio" value="stub">
+                		stub<input name="product_type" type="radio" value="stub">
 
                 	</div>
 		</td>

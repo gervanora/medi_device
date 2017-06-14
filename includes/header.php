@@ -17,7 +17,8 @@
 	 	<div class="header">Medical Device Database System
         <div class='admin_menu'>
         	<ul>
-        		<li><a href="index.php">Home</a></li>
+			    <li><a href="home.php">Home</a></li>
+        		<li><a href="index.php">Search</a></li>
 	        	<li><a href="addproduct_form.php">Add Products</a></li>
 	        	<li><a href="list_products.php">List Products</a></li>
 				<li><a href="companies.php">Companies</a></li>
@@ -31,9 +32,12 @@
 		</div>
 	 	</div>
 <?php include 'db_config.php'; 
+	  //echo "here"; die;
 	  session_start();
+	  //print_r($_SESSION); die;
 	  //print_r($_SERVER['REQUEST_URI']); die;
-	  if(empty($_SESSION['token']) && $_SERVER['REQUEST_URI'] != '/medi_device/index.php'){
+	  //if(empty($_SESSION['token']) && $_SERVER['REQUEST_URI'] != '/medi_device/index.php' ){
+	  if(empty($_SESSION['token'])){
 	  	header("Location: /medi_device/login.php");
 	  }
 ?>

@@ -242,6 +242,7 @@
               <td>Approval status</td>
               <td>Last Modified Date</td>
               <td>&nbsp;</td>
+			  <td><b>Only for Admin</b></td>
 			</thead>
 			<tbody>
              <?php if ($result->num_rows > 0) {
@@ -267,12 +268,18 @@
 					<td><?php echo $row['username']; ?></td>
 					<td><a href="view_product.php?id=<?php echo $row['id']; ?>">View</a></td>
 					<td>
-					<?php 
-					      echo ($row['approval_status']) ? 'Approved':'Pending';
-                    ?>
+
+					            <div class="form_div">
+            
+             <select class="approval_status" name="approval_status" id="approval_status_<?php echo $row['id']; ?>"> 
+              <option value="0" <?php if($row['approval_status'] == 0) echo "selected"; ?>>Pending</option>
+              <option value="1" <?php if($row['approval_status'] == 1) echo "selected"; ?>>Approved</option>
+            </select>
+            </div>
 					</td>
 					<td><?php echo date('d/m/Y H:i:s',strtotime($row['modified'])); ?></td>
 					<td><a href="delete.php?type=product&id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
+					<td><a id="update_link_<?php echo $row['id']; ?>" href="update.php?type=product&id=<?php echo $row['id']; ?>&approval_status=<?php echo $row['approval_status']; ?>" onclick="return confirm('Are you sure you want to update?')">Update</a></td>
 				</tr>
 			 <?php	}
 				}
@@ -283,6 +290,22 @@
 		</div>
 <script type="text/javascript">
 	$('document').ready(function(){
+
+		$('.approval_status').change(function(){
+			var approval_status = $('.approval_status').val();
+			//alert(approval_status);
+			var attr_id = $(this).attr('id');
+			var id_paths = attr_id.split('_');
+			var record_id = 'update_link_'+id_paths[2];
+			//alert(record_id);
+			var update_link = $('#'+record_id).attr('href');
+			//alert(update_link);
+			update_link = update_link.slice(0, -1);
+			update_link = update_link+approval_status;
+			//alert(update_link);
+			$('#'+record_id).attr('href',update_link);
+
+		});
 		$("#company_name").autocomplete({
                 source: 'company_search.php'
             });

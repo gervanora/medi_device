@@ -24,6 +24,4 @@
 	 	</div>
 <?php include 'db_config.php'; 
 	  session_start();
-	  //$userid=$_SESSION['user_id'];
-	  
 ?>
