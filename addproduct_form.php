@@ -51,6 +51,15 @@
                     </select>
                   </div>
                   <div class="form_div">
+                    <label>Highest Stage of Development: </label>
+                    <select id='highest_stage_development'>
+                        <option value="Early Development">Early Development</option>
+                        <option value="Preclinical">Preclinical</option>
+                        <option value="Clinical">Clinical</option>
+                        <option value="Inapproval">Inapproval</option>
+                    </select>
+                  </div>
+                  <div class="form_div">
                     <label>Approved in other regions: </label>
                     <select id="approved_country">
                       <option value=""></option>
@@ -145,6 +154,7 @@
                       <thead>
                         <td>Regulatory Body</td>
                         <td>Developing Country</td>
+                        <td>Highest Stage of Development</td>
                         <td>Approved in other</td>
                         <td>Estimated Approval</td>
                         <td>Estimated Launch</td>
@@ -225,8 +235,12 @@
                             <td><input type="text" name="Milestonetitle_1" ></td>
                             <td>
                                 <select name="Milestonetype_1">
-                                  <option value="type1">Type1</option>
-                                  <option value="type2">Type2</option>
+                                  <option value="Regulatory">Regulatory</option>
+                                  <option value="Product Launch">Product Launch</option>
+                                  <option value="Product Approval">Product Approval</option>
+                                  <option value="Clinical Trials">Clinical Trials</option>
+                                  <option value="Acquisition">Acquisition</option>
+                                  <option value="Partnership">Partnership</option>
                                 </select>
                             </td>
                           </tr>
@@ -353,7 +367,7 @@
                   });
 
                   $('#extra_milestone').click(function(){
-                    $('.milestone_entry').append('<tr><td><input type="date" name="Milestonedate_'+curr_milestone+'" ></td><td><input type="text" name="Milestonetitle_'+curr_milestone+'" ></td><td><select name="Milestonetype_'+curr_milestone+'"><option value="type1">Type1</option><option value="type2">Type2</option></select></td></tr>');
+                    $('.milestone_entry').append('<tr><td><input type="date" name="Milestonedate_'+curr_milestone+'" ></td><td><input type="text" name="Milestonetitle_'+curr_milestone+'" ></td><td><select name="Milestonetype_'+curr_milestone+'"><option value="Regulatory">Regulatory</option><option value="Product Launch">Product Launch</option><option value="Product Approval">Product Approval</option><option value="Clinical Trials">Clinical Trials</option><option value="Acquisition">Acquisition</option><option value="Partnership">Partnership</option></select></td></tr>');
                     curr_milestone++;
                   });
 
@@ -373,13 +387,14 @@
                   $('#save_pipeline a').click(function(){
                     var country_reg_body = $('#country_reg_body').val();
                     var pipeline_country = $('#pipeline_country').val();
+                    var highest_stage_development = $('#highest_stage_development').val();
                     var approved_country = $('#approved_country').val();
                     var estimated_approval = $('#estimated_approval_year').val()+'-'+$('#estimated_approval_month').val();
                     var estimated_launch = $('#estimated_launch_year').val()+'-'+$('#estimated_launch_month').val();
                     var device_class = $('#device_class').val();
                     var AnalystNotes = $('#AnalystNotes').val();
 
-                    $('#pipeline_list tbody').append('<tr><td><input name="pipeline_data['+curr_pipeline+'][country_reg_body]" type="text" value="'+country_reg_body+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][pipeline_country]" type="text" value="'+pipeline_country+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][approved_country]" type="text" value="'+approved_country+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][estimated_approval]" type="text" value="'+estimated_approval+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][estimated_launch]" type="text" value="'+estimated_launch+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][device_class]" type="text" value="'+device_class+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][AnalystNotes]" type="text" value="'+AnalystNotes+'"/></td><td class="del_pipelinedata"><img src="images/delete.png"/></td></tr>');
+                    $('#pipeline_list tbody').append('<tr><td><input name="pipeline_data['+curr_pipeline+'][country_reg_body]" type="text" value="'+country_reg_body+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][pipeline_country]" type="text" value="'+pipeline_country+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][highest_stage_development]" type="text" value="'+highest_stage_development+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][approved_country]" type="text" value="'+approved_country+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][estimated_approval]" type="text" value="'+estimated_approval+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][estimated_launch]" type="text" value="'+estimated_launch+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][device_class]" type="text" value="'+device_class+'"/></td><td><input name="pipeline_data['+curr_pipeline+'][AnalystNotes]" type="text" value="'+AnalystNotes+'"/></td><td class="del_pipelinedata"><img src="images/delete.png"/></td></tr>');
                     curr_pipeline++;
                   });
 

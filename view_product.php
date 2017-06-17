@@ -19,6 +19,12 @@
 		$classification_data = $class_res->fetch_all();
 	}
 
+	$pipeline_sql = "SELECT * FROM `pipeline_product` WHERE product_id = ".$_GET['id'];
+	$pipeline_res =  $conn->query($pipeline_sql);
+
+	$market_sql = "SELECT * FROM `market_product` WHERE product_id = ".$_GET['id'];
+	$market_res =  $conn->query($market_sql);
+
 ?>
 <div class="content product_view">
 	<h3>Product Details</h3>
@@ -57,6 +63,70 @@
 					</tr>
 				<?php } ?>
 			</tbody>
+		</table>
+	</div>
+	<?php } ?>
+	<?php if ($pipeline_res->num_rows > 0) {	
+		$pipeline_data = $pipeline_res->fetch_all();
+	?>
+	<div>
+		<div><b>Pipeline Info</b></div>
+		<table border="1">
+			<thead>
+				<td>Country Reg. Body</td>
+				<td>Developing Country</td>
+				<td>Highest Stage of development</td>
+				<td>Approved Other</td>
+				<td>Estimated Approval</td>
+				<td>Estimated Launch</td>
+				<td>Device Class</td>
+				<td>Analyst Notes</td>
+			</thead>
+		<?php foreach ($pipeline_data as $pipe_data){ ?>
+			<tr>
+				<td><?php echo $pipe_data[2];  ?></td>
+				<td><?php echo $pipe_data[3];  ?></td>
+				<td><?php echo $pipe_data[4];  ?></td>
+				<td><?php echo $pipe_data[5];  ?></td>
+				<td><?php echo date('d/m/Y',strtotime($pipe_data[6])); ?></td>
+				<td><?php echo date('d/m/Y',strtotime($pipe_data[7])); ?></td>
+				<td><?php echo $pipe_data[8];  ?></td>
+				<td><?php echo $pipe_data[9];  ?></td>
+			</tr>
+		<?php } ?>
+		</table>
+	</div>
+	<?php } ?>
+	<?php if ($market_res->num_rows > 0) {	
+		$market_data = $market_res->fetch_all();
+	?>
+	<div>
+		<div><b>Marketed Info</b></div>
+		<table border="1">
+			<thead>
+				<td>Approved Country</td>
+				<td>Reg. Body</td>
+				<td>510k Num</td>
+				<td>PMA Num</td>
+				<td>510k Mod Num</td>
+				<td>PMA Mod Num</td>
+				<td>Submission date</td>
+				<td>Approval Date</td>
+				<td>Launch Date</td>
+			</thead>
+		<?php foreach ($market_data as $mar_data){ ?>
+			<tr>
+				<td><?php echo $mar_data[2];  ?></td>
+				<td><?php echo $mar_data[3];  ?></td>
+				<td><?php echo $mar_data[4];  ?></td>
+				<td><?php echo $mar_data[5];  ?></td>
+				<td><?php echo $mar_data[6]; ?></td>
+				<td><?php echo $mar_data[7]; ?></td>
+				<td><?php echo date('d/m/Y',strtotime($mar_data[8])); ?></td>
+				<td><?php echo date('d/m/Y',strtotime($mar_data[9])); ?></td>
+				<td><?php echo date('d/m/Y',strtotime($mar_data[10])); ?></td>
+			</tr>
+		<?php } ?>
 		</table>
 	</div>
 	<?php } ?>

@@ -140,7 +140,7 @@ elseif ($product_main['pipelined_marketed'] == "Pipeline") {
 	foreach ($_POST['pipeline_data'] as $pipeline_data) {
 		$pipeline_data['estimated_approval'] = $pipeline_data['estimated_approval'].'-01';
 		$pipeline_data['estimated_launch'] = $pipeline_data['estimated_launch'].'-01';
-		$pipeline_insert = "INSERT INTO pipeline_product(product_id,country_reg_body,developing_country,approved_other,estimated_approval,estimated_launch,device_class,analyst_notes) VALUES(".$product_id.",'".$pipeline_data['country_reg_body']."','".$pipeline_data['pipeline_country']."','".$pipeline_data['approved_country']."','".$pipeline_data['estimated_approval']."','".$pipeline_data['estimated_launch']."','".$pipeline_data['device_class']."','".$pipeline_data['AnalystNotes']."')";
+		$pipeline_insert = "INSERT INTO pipeline_product(product_id,country_reg_body,developing_country,approved_other,estimated_approval,estimated_launch,device_class,analyst_notes,highest_stage_development) VALUES(".$product_id.",'".$pipeline_data['country_reg_body']."','".$pipeline_data['pipeline_country']."','".$pipeline_data['approved_country']."','".$pipeline_data['estimated_approval']."','".$pipeline_data['estimated_launch']."','".$pipeline_data['device_class']."','".$pipeline_data['AnalystNotes']."','".$pipeline_data['highest_stage_development']."')";
 		$conn->query($pipeline_insert);
 	}
 }
