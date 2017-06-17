@@ -57,6 +57,7 @@
                         <option value="Preclinical">Preclinical</option>
                         <option value="Clinical">Clinical</option>
                         <option value="Inapproval">Inapproval</option>
+                        <option value="Approved">Approved</option>
                     </select>
                   </div>
                   <div class="form_div">
