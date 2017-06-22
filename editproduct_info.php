@@ -14,7 +14,7 @@ $reg_classes = mysqli_fetch_all($reg_class_res);
 
 //main product info
 if(!empty($_GET['id'])){
-	$sql = "Select products.*,company.company_name FROM products LEFT JOIN company on products.company_id = company.id WHERE products.id=".$_GET['id'];
+	$sql = "Select products.*,company.company_name,indication.indication_name,application.application FROM products LEFT JOIN company on products.company_id = company.id LEFT JOIN indication on products.indication_id = indication.id LEFT JOIN application on products.application_id = application.id WHERE products.id=".$_GET['id'];
 	$result = $conn->query($sql);
 
 	if($result->num_rows > 0)
@@ -28,11 +28,18 @@ if(!empty($_GET['id'])){
 			$milestone_data = $milestone_res->fetch_all();
 		}
 
-		$class_sql = 'Select product_classification.classification_fullname FROM product_to_classification LEFT JOIN product_classification ON product_to_classification.product_classification_id = product_classification.id WHERE product_id='.$_GET['id'];
+		$class_sql = 'Select product_classification.id,product_classification.classification_name,product_classification.classification_fullname FROM product_to_classification LEFT JOIN product_classification ON product_to_classification.product_classification_id = product_classification.id WHERE product_id='.$_GET['id'];
 		$class_res = $conn->query($class_sql);
 
 		if ($class_res->num_rows > 0) {
 			$classification_data = $class_res->fetch_all();
+		}
+
+		$tech_sql = 'Select product_technology.id,product_technology.technology FROM product_to_technology LEFT JOIN product_technology ON product_to_technology.product_technology_id = product_technology.id WHERE product_id='.$_GET['id'];
+		$tech_res = $conn->query($tech_sql);
+
+		if ($tech_res->num_rows > 0) {
+			$technology_data = $tech_res->fetch_all();
 		}
 
 		$pipeline_sql = "SELECT * FROM `pipeline_product` WHERE product_id = ".$_GET['id'];
