@@ -1,7 +1,7 @@
 <?php include 'includes/header.php'; ?>
 <?php include 'editproduct_info.php' ?>
 <div class="content">
-  <form id="product_form" action="add_product.php" method="POST">
+  <form id="product_form" action="edit_product.php?id=<?php echo $_GET['id']; ?>" method="POST">
       <div>
           <h3>Step 1</h3>
           <section>
