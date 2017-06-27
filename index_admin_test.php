@@ -1,7 +1,6 @@
 <?php include 'includes/header.php'; ?>
 <?php
-
-    $authors_query = "Select * FROM users";
+ $authors_query = "Select * FROM users";
     $authors_list = $conn->query($authors_query);
 
 	if(!empty($_POST)){
@@ -268,11 +267,11 @@
 					<td><?php echo $row['username']; ?></td>
 					<td><a href="view_product.php?id=<?php echo $row['id']; ?>">View</a></td>
 					<td>
-
-					           <div class="form_div">
-             <select class="approval_status" name="approval_status" id="approval_status_<?php echo $row['id']; ?>"> 
-              <option value="0" <?php if($row['approval_status'] == 0) echo "selected"; ?>>Pending</option>
-              <option value="1" <?php if($row['approval_status'] == 1) echo "selected"; ?>>Approved</option>
+					            <div class="form_div">
+					            <a href="" class="approval_status" name="approval_status" id="approval_status_<?php echo $row['id'];?>onclick="myEdit()"">Edit</a>
+             <select class="approval_status" name="approval_status" id="approval_status_<?php echo $row['id']; ?>"disabled> 
+              <option value="0" <?php if($row['approval_status'] == 0) echo "selected"; ?>Pending</option>
+              <option value="1" <?php if($row['approval_status'] == 1) echo "selected"; ?>Approved</option>
             </select>
             </div>
 					</td>
@@ -287,9 +286,16 @@
 		</table>
 	  	</div>
 		</div>
+		<script type="text/javascript">
+		document.getElementById("myEdit").onclick = function() {myFunction()};
+		function myFunction() {
+    document.getElementById("form_div").classList.toggle("show");
+}
+		</script>
 <script type="text/javascript">
-	$('document').ready(function(){
 
+	$('document').ready(function(){
+`
 		$('.approval_status').change(function(){
 			var approval_status = $('.approval_status').val();
 			//alert(approval_status);

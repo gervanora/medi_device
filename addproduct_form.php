@@ -13,7 +13,7 @@
                 <div class="form_div"><label>Product Generic Name : </label><input type="text" name="generic_name" ></div>
                 <div class="form_div"><label>Product Brand Name : </label><input type="text" name="brand_name" id="brand_name" ></div>
                 <div class="form_div"><label>Product Alias Name : </label><input type="text" name="product_alias" ></div>
-                <div class="form_div"><label>Product Classification : </label><input type="text" name="product_classification" id="product_classification"></div>
+                <div class="form_div" style:" width: 100px;height: 100px;overflow: scroll;"><label>Product Classification : </label><input type="text" name="product_classification" id="product_classification"></div>
                 <div id='classification_list'>
                 </div>
                 <div class="form_div"><label>Product  Profile Status : </label>
