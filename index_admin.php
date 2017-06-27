@@ -268,6 +268,7 @@
 					<td><?php echo $row['username']; ?></td>
 					<td><a href="view_product.php?id=<?php echo $row['id']; ?>">View</a></td>
 					<td>
+<<<<<<< HEAD
 
 					           <div class="form_div">
              <select class="approval_status" name="approval_status" id="approval_status_<?php echo $row['id']; ?>"> 
@@ -275,6 +276,15 @@
               <option value="1" <?php if($row['approval_status'] == 1) echo "selected"; ?>>Approved</option>
             </select>
             </div>
+=======
+						<div class="form_div">
+							 <select class="approval_status" name="approval_status" id="approval_status_<?php echo $row['id']; ?>" disabled> 
+							  <option value="0" <?php if($row['approval_status'] == 0) echo "selected"; ?>>Pending</option>
+							  <option value="1" <?php if($row['approval_status'] == 1) echo "selected"; ?>>Approved</option>
+							</select>
+						</div>
+                    <a href="javascript:void(0);" class="edit_approval">Edit</a>
+>>>>>>> 2768181d9e68c131eeb4bda72ecd3fcff464ac57
 					</td>
 					<td><?php echo date('d/m/Y H:i:s',strtotime($row['modified'])); ?></td>
 					<td><a href="delete.php?type=product&id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
@@ -304,6 +314,10 @@
 			//alert(update_link);
 			$('#'+record_id).attr('href',update_link);
 
+		});
+
+		$('.edit_approval').click(function(){
+			$(this).siblings().find('.approval_status').removeAttr('disabled');
 		});
 		$("#company_name").autocomplete({
                 source: 'company_search.php'

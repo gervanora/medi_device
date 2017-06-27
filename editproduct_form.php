@@ -1,24 +1,36 @@
 <?php include 'includes/header.php'; ?>
-<?php include 'addproduct_info.php' ?>
+<?php include 'editproduct_info.php' ?>
 <div class="content">
-  <form id="product_form" action="add_product.php" method="POST">
+  <form id="product_form" action="edit_product.php?id=<?php echo $_GET['id']; ?>" method="POST">
       <div>
           <h3>Step 1</h3>
           <section>
-              <div class="form_div"><label>Company Name: </label><input type="text" name="company_name" id="company_name"></div>
+              <div class="form_div"><label>Company Name: </label><input type="text" name="company_name" id="company_name" value="<?php if(!empty($data['company_name'])) echo $data['company_name']; ?>"></div>
                 <div class="form_div"><label>Product Type: </label>
-                <input type="radio" name="prod_type_1" value="UniversityProduct"> University Product      
-                <input type="radio" name="prod_type_1" value="ProfiledProduct" required> Profiled  Product  
+                <input type="radio" name="prod_type_1" value="UniversityProduct" <?php if($data['university_pipelined']=='UniversityProduct') echo " checked"; ?>> University Product      
+                <input type="radio" name="prod_type_1" value="ProfiledProduct" required <?php if($data['university_pipelined']=='ProfiledProduct') echo " checked"; ?>> Profiled  Product  
                 </div>
-                <div class="form_div"><label>Product Generic Name : </label><input type="text" name="generic_name" ></div>
-                <div class="form_div"><label>Product Brand Name : </label><input type="text" name="brand_name" id="brand_name" ></div>
-                <div class="form_div"><label>Product Alias Name : </label><input type="text" name="product_alias" ></div>
-                <div class="form_div" style:" width: 100px;height: 100px;overflow: scroll;"><label>Product Classification : </label><input type="text" name="product_classification" id="product_classification"></div>
-                <div id='classification_list' style:" width: 100px;height: 100px;overflow: scroll;"> 
+                <div class="form_div"><label>Product Generic Name : </label><input type="text" name="generic_name" value="<?php if(!empty($data['generic_name'])) echo $data['generic_name']; ?>"></div>
+                <div class="form_div"><label>Product Brand Name : </label><input type="text" name="brand_name" id="brand_name" value="<?php if(!empty($data['brand_name'])) echo $data['brand_name']; ?>"></div>
+                <div class="form_div"><label>Product Alias Name : </label><input type="text" name="product_alias" value="<?php if(!empty($data['alias_name'])) echo $data['alias_name']; ?>"></div>
+                <div class="form_div"><label>Product Classification : </label><input type="text" name="product_classification" id="product_classification"></div>
+                <div id='classification_list'>
+                <?php 
+                  foreach ($classification_data as $classification) {
+                ?>
+                  <div id="classification<?php echo $classification[0]; ?>"><?php echo $classification[2]; ?>
+                  <input name="classifications[]" type="hidden" value="<?php echo $classification[0]; ?>">
+                  <div class="del_classification">
+                    <img src="images/delete.png">
+                  </div>
+                  </div>
+                <?php
+                  }
+                ?>
                 </div>
                 <div class="form_div"><label>Product  Profile Status : </label>
-                <input type="radio" name="profile_status" value="Stub"> Stub 
-                <input type="radio" name="profile_status" value="Profile"> Profile 
+                <input type="radio" name="profile_status" value="Stub" <?php if($data['profile_status']=='Stub') echo " checked"; ?>> Stub 
+                <input type="radio" name="profile_status" value="Profile" <?php if($data['profile_status']=='Profile') echo " checked"; ?>> Profile 
                 </div>
                 <div style="display:none;" class="save-stub"><a href="javascript:void(0);">Save Stub Product</a></div>
           </section>
@@ -26,8 +38,8 @@
           <section>
                 <div class="form_div"> 
                     <label>Product  Type : </label>
-                    <input type="radio" name="prod_type_2" value="Pipeline" class='step2_radio'> Pipeline
-                    <input type="radio" name="prod_type_2" value="Markets" class='step2_radio'> Markets
+                    <input type="radio" name="prod_type_2" value="Pipeline" class='step2_radio' <?php if($data['pipelined_marketed']=='Pipeline') echo " checked"; ?>> Pipeline
+                    <input type="radio" name="prod_type_2" value="Markets" class='step2_radio' <?php if($data['pipelined_marketed']=='Marketed') echo " checked"; ?>> Markets
                 </div>
                 <div class="Pipeline box" style="display:none;">
                   <div class="sub-title">Pipeline Products info</div>
@@ -164,7 +176,24 @@
                         <td>Action</td>
                       </thead>
                       <tbody>
-                        
+                        <?php 
+                                $p = 0; 
+                                if($pipeline_res->num_rows > 0) {  
+                                $pipeline_data = $pipeline_res->fetch_all();
+                                foreach ($pipeline_data as $pipe_data){
+                        ?>
+                            <tr>
+                              <td><input name="pipeline_data[<?php echo $p; ?>][country_reg_body]" type="text" value="<?php echo $pipe_data[2]; ?>" class="valid" aria-invalid="false"></td>
+                              <td><input name="pipeline_data[<?php echo $p; ?>][pipeline_country]" type="text" value="<?php echo $pipe_data[3]; ?>"></td>
+                              <td><input name="pipeline_data[<?php echo $p; ?>][highest_stage_development]" type="text" value="<?php echo $pipe_data[4]; ?>"></td>
+                              <td><input name="pipeline_data[<?php echo $p; ?>][approved_country]" type="text" value="<?php echo $pipe_data[5]; ?>"></td>
+                              <td><input name="pipeline_data[<?php echo $p; ?>][estimated_approval]" type="text" value="<?php echo date('Y-m',strtotime($pipe_data[6])); ?>"></td>
+                              <td><input name="pipeline_data[<?php echo $p; ?>][estimated_launch]" type="text" value="<?php echo date('Y-m',strtotime($pipe_data[7])); ?>"></td>
+                              <td><input name="pipeline_data[<?php echo $p; ?>][device_class]" type="text" value="<?php echo $pipe_data[8]; ?>"></td>
+                              <td><input name="pipeline_data[<?php echo $p; ?>][AnalystNotes]" type="text" value="<?php echo $pipe_data[9]; ?>"></td>
+                              <td class="del_pipelinedata"><img src="images/delete.png"></td>
+                            </tr>
+                        <?php $p++; }} ?>
                       </tbody>
                     </table>
                   </div>
@@ -216,7 +245,25 @@
                         <td>Action</td>
                       </thead>
                       <tbody>
-                        
+                        <?php 
+                          $k = 0;
+                          if ($market_res->num_rows > 0) {  
+                          $market_data = $market_res->fetch_all();
+                          foreach ($market_data as $mar_data){
+                        ?>
+                          <tr>
+                            <td><input name="market_data[<?php echo $k; ?>][approved_country]" type="text" value="<?php echo $mar_data[2]; ?>"></td>
+                            <td><input name="market_data[<?php echo $k; ?>][country_reg_body]" type="text" value="<?php echo $mar_data[3]; ?>"></td>
+                            <td><input name="market_data[<?php echo $k; ?>][510k_num]" type="text" value="<?php echo $mar_data[4]; ?>"></td>
+                            <td><input name="market_data[<?php echo $k; ?>][pma_num]" type="text" value="<?php echo $mar_data[5]; ?>"></td>
+                            <td><input name="market_data[<?php echo $k; ?>][submission_date]" type="text" value="<?php echo date('Y-m-d',strtotime($mar_data[8])); ?>"></td>
+                            <td><input name="market_data[<?php echo $k; ?>][approval_date]" type="text" value="<?php echo date('Y-m-d',strtotime($mar_data[9])); ?>"></td>
+                            <td><input name="market_data[<?php echo $k; ?>][launch_date]" type="text" value="2018-02-02"></td>
+                            <td><input name="market_data[<?php echo $k; ?>][510k_mod_num]" type="text" value="<?php echo $mar_data[6]; ?>"></td>
+                            <td><input name="market_data[<?php echo $k; ?>][pma_mod_num]" type="text" value="<?php echo $mar_data[7]; ?>"></td>
+                            <td class="del_marketdata"><img src="images/delete.png"></td>
+                          </tr>
+                        <?php $k++; }} ?>
                       </tbody>
                     </table>
                   </div>
@@ -231,17 +278,33 @@
                           <td width="20%">Type</td>
                         </tr>
                         <tbody class="milestone_entry">
+                          <?php $m = 1; foreach ($milestone_data as $milestone) { ?> 
+                             <tr>
+                              <td><input type="date" name="Milestonedate_<?php echo $m; ?>" value="<?php echo date('Y-m-d',strtotime($milestone[3])); ?>"></td>
+                              <td><input type="text" name="Milestonetitle_<?php echo $m; ?>" value="<?php echo $milestone[2]; ?>"></td>
+                              <td>
+                                  <select name="Milestonetype_<?php echo $m; ?>">
+                                    <option value="Regulatory" <?php if($milestone[4] == 'Regulatory') echo 'selected'; ?>>Regulatory</option>
+                                    <option value="Product Launch" <?php if($milestone[4] == 'Product Launch') echo 'selected'; ?>>Product Launch</option>
+                                    <option value="Product Approval" <?php if($milestone[4] == 'Product Approval') echo 'selected'; ?>>Product Approval</option>
+                                    <option value="Clinical Trials" <?php if($milestone[4] == 'Clinical Trials') echo 'selected'; ?>>Clinical Trials</option>
+                                    <option value="Acquisition" <?php if($milestone[4] == 'Acquisition') echo 'selected'; ?>>Acquisition</option>
+                                    <option value="Partnership" <?php if($milestone[4] == 'Partnership') echo 'selected'; ?>>Partnership</option>
+                                  </select>
+                              </td>
+                            </tr> 
+                          <?php $m++; } ?>
                           <tr>
-                            <td><input type="date" name="Milestonedate_1" ></td>
-                            <td><input type="text" name="Milestonetitle_1" ></td>
+                            <td><input type="date" name="Milestonedate_<?php echo $m; ?>" ></td>
+                            <td><input type="text" name="Milestonetitle_<?php echo $m; ?>" ></td>
                             <td>
-                                <select name="Milestonetype_1">
-                                  <option value="Regulatory">Regulatory</option>
-                                  <option value="Product Launch">Product Launch</option>
-                                  <option value="Product Approval">Product Approval</option>
-                                  <option value="Clinical Trials">Clinical Trials</option>
-                                  <option value="Acquisition">Acquisition</option>
-                                  <option value="Partnership">Partnership</option>
+                                <select name="Milestonetype_<?php echo $m; ?>">
+                                    <option value="Regulatory">Regulatory</option>
+                                    <option value="Product Launch">Product Launch</option>
+                                    <option value="Product Approval">Product Approval</option>
+                                    <option value="Clinical Trials">Clinical Trials</option>
+                                    <option value="Acquisition">Acquisition</option>
+                                    <option value="Partnership">Partnership</option>
                                 </select>
                             </td>
                           </tr>
@@ -255,28 +318,31 @@
           </section>
           <h3>Step 3</h3>
           <section>
-              <div class="form_div"><label>Product Description: </label><textarea class="ckeditor" name="product_description"></textarea></div>
-              <div class="form_div"><label>Function: </label><input type="text" name="function_data" id="function_data"></div>
+              <div class="form_div"><label>Product Description: </label><textarea class="ckeditor" name="product_description"><?php echo $data['product_description']; ?></textarea></div>
+              <div class="form_div"><label>Function: </label><input type="text" name="function_data" id="function_data" value="<?php echo $data['function_data']; ?>"></div>
                 <div class="form_div"><label>Product Technology : </label><input type="text" name="product_technology" id="product_technology" ></div>
                 <div id='technology_list'>
+                <?php foreach ($technology_data as $technology){ ?>
+                  <div id="technology<?php echo $technology[0]; ?>"><?php echo $technology[1]; ?><input name="technologies[]" type="hidden" value="<?php echo $technology[0]; ?>"><div class="del_technology"><img src="images/delete.png"></div></div>
+                <?php } ?>
                 </div>
-                <div class="form_div"><label>Technology Description : </label><textarea class="ckeditor" name="technology_description"></textarea></div>
-                <div class="form_div"><label>Product Developing  : </label><input type="text" name="product_developing" id="product_developing"></div>
-                <div class="form_div"><label>Development Partners Any : </label><input type="text" name="development_partners" id="development_partners"></div>
+                <div class="form_div"><label>Technology Description : </label><textarea class="ckeditor" name="technology_description"><?php echo $data['product_tech_description']; ?></textarea></div>
+                <div class="form_div"><label>Product Developing  : </label><input type="text" name="product_developing" id="product_developing" value="<?php echo $data['product_developing']; ?>"></div>
+                <div class="form_div"><label>Development Partners Any : </label><input type="text" name="development_partners" id="development_partners" value="<?php echo $data['development_partners']; ?>"></div>
           </section>
           <h3>Step 4</h3>
           <section>
-              <div class="form_div"><label>Indication : </label><input type="text" name="indication" id="indication" required></div>
-                <div class="form_div"><label>Application : </label><input type="text" name="application" id="application" > </div>
-                <div class="form_div"><label>Product Specifications : </label><textarea class="ckeditor" name="product_specification" ></textarea></div>
-                <div class="form_div"><label>Product Sources  : </label><textarea class="ckeditor" name="product_source"></textarea></div>
+              <div class="form_div"><label>Indication : </label><input type="text" name="indication" id="indication" value="<?php echo $data['indication_name']; ?>" required></div>
+                <div class="form_div"><label>Application : </label><input type="text" name="application" id="application" value="<?php echo $data['application']; ?>"> </div>
+                <div class="form_div"><label>Product Specifications : </label><textarea class="ckeditor" name="product_specification" ><?php echo $data['product_specification']; ?></textarea></div>
+                <div class="form_div"><label>Product Sources  : </label><textarea class="ckeditor" name="product_source"><?php echo $data['product_sources']; ?></textarea></div>
           </section>
       </div>
   </form>
     <script type="text/javascript">
             var curr_milestone = 2;
-            var curr_pipeline = 0;
-            var curr_marketed = 0;
+            var curr_pipeline = <?php echo $p; ?>;
+            var curr_marketed = <?php echo $k; ?>;
             var form = $("#product_form");
                 form.validate({
                     errorPlacement: function errorPlacement(error, element) { element.before(error); },
