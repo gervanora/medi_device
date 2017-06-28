@@ -84,19 +84,15 @@ $product_main['product_specification'] = $_POST['product_specification'];
 $product_main['product_sources'] = $_POST['product_source'];
 $product_main['function_data'] = $_POST['function_data'];
 
-$product_main['user_id'] = $_SESSION['user_id'];
-$product_main['approval_status'] = 0;
-$product_main['created'] = date('Y-m-d H:i:s');
+$product_main['edited_user_id'] = $_SESSION['edited_user_id'];
 $product_main['modified'] = date('Y-m-d H:i:s');
-
 $product_main['product_developing'] = $_POST['product_developing'];
 $product_main['development_partners'] = $_POST['development_partners'];
 
 $product_update = "INSERT INTO products (university_pipelined,alias_name,generic_name,profile_status,pipelined_marketed,product_description,product_tech_description,product_specification,product_sources,company_id,brand_name,indication_id,application_id,user_id,approval_status,created,modified,product_developing,development_partners,function_data) VALUES ('".$product_main['university_pipelined']."','".$product_main['alias_name']."','".$product_main['generic_name']."','".$product_main['profile_status']."','".$product_main['pipelined_marketed']."','".$product_main['product_description']."','".$product_main['product_tech_description']."','".$product_main['product_specification']."','".$product_main['product_sources']."',".$product_main['company_id'].",'".$product_main['brand_name']."',".$product_main['indication_id'].",".$product_main['application_id'].",".$product_main['user_id'].",".$product_main['approval_status'].",'".$product_main['created']."','".$product_main['modified']."','".$product_main['product_developing']."','".$product_main['development_partners']."','".$product_main['function_data']."')";
 
 $conn->query($product_update);
-//$product_id = mysqli_insert_id($conn);
-
+$product_update = "UPDATE products SET university_pipelined = '".$product_main['university_pipelined']."',alias_name = '".$product_main['alias_name']."',generic_name = '".$product_main['generic_name']."',profile_status = '".$product_main['profile_status']."',pipelined_marketed = '".$product_main['pipelined_marketed']."',product_description = '".$product_main['product_description']."',product_tech_description = '".$product_main['product_tech_description']."',product_specification = '".$product_main['product_specification']."',product_sources = '".$product_main['product_sources']."',company_id = ".$product_main['company_id'].",brand_name = '".$product_main['brand_name']."',indication_id = ".$product_main['indication_id'].",application_id = ".$product_main['application_id'].",edited_user_id = ".$product_main['edit_user_id'].",modified = '".$product_main['modified']."',product_developing = '".$product_main['product_developing']."',development_partners = '".$product_main['development_partners']."',function_data = '".$product_main['function_data']."' WHERE id =".$product_id;
 $del_query = "DELETE from product_to_classification WHERE product_id=".$product_id;
 $conn->query($del_query);
 
