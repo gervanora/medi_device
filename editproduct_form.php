@@ -15,7 +15,7 @@
                 <div class="form_div"><label>Product Alias Name : </label><input type="text" name="product_alias" value="<?php if(!empty($data['alias_name'])) echo $data['alias_name']; ?>"></div>
                 <div class="form_div"><label>Product Classification : </label><input type="text" name="product_classification" id="product_classification"></div>
                 <div id='classification_list'>
-                <?php 
+                <?php if(!empty($classification_data)){
                   foreach ($classification_data as $classification) {
                 ?>
                   <div id="classification<?php echo $classification[0]; ?>"><?php echo $classification[2]; ?>
@@ -25,6 +25,7 @@
                   </div>
                   </div>
                 <?php
+                    }
                   }
                 ?>
                 </div>
@@ -278,7 +279,7 @@
                           <td width="20%">Type</td>
                         </tr>
                         <tbody class="milestone_entry">
-                          <?php $m = 1; foreach ($milestone_data as $milestone) { ?> 
+                          <?php $m = 1; if(!empty($milestone_data)){ foreach ($milestone_data as $milestone) {  ?> 
                              <tr>
                               <td><input type="date" name="Milestonedate_<?php echo $m; ?>" value="<?php echo date('Y-m-d',strtotime($milestone[3])); ?>"></td>
                               <td><input type="text" name="Milestonetitle_<?php echo $m; ?>" value="<?php echo $milestone[2]; ?>"></td>
@@ -293,7 +294,7 @@
                                   </select>
                               </td>
                             </tr> 
-                          <?php $m++; } ?>
+                          <?php $m++; }} ?>
                           <tr>
                             <td><input type="date" name="Milestonedate_<?php echo $m; ?>" ></td>
                             <td><input type="text" name="Milestonetitle_<?php echo $m; ?>" ></td>
@@ -322,9 +323,9 @@
               <div class="form_div"><label>Function: </label><input type="text" name="function_data" id="function_data" value="<?php echo $data['function_data']; ?>"></div>
                 <div class="form_div"><label>Product Technology : </label><input type="text" name="product_technology" id="product_technology" ></div>
                 <div id='technology_list'>
-                <?php foreach ($technology_data as $technology){ ?>
+                <?php if(!empty($technology_data)){ foreach ($technology_data as $technology){ ?>
                   <div id="technology<?php echo $technology[0]; ?>"><?php echo $technology[1]; ?><input name="technologies[]" type="hidden" value="<?php echo $technology[0]; ?>"><div class="del_technology"><img src="images/delete.png"></div></div>
-                <?php } ?>
+                <?php } } ?>
                 </div>
                 <div class="form_div"><label>Technology Description : </label><textarea class="ckeditor" name="technology_description"><?php echo $data['product_tech_description']; ?></textarea></div>
                 <div class="form_div"><label>Product Developing  : </label><input type="text" name="product_developing" id="product_developing" value="<?php echo $data['product_developing']; ?>"></div>
