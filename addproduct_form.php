@@ -306,7 +306,8 @@
                         $('#product_form').submit();
                     }
                 });
-
+                <?php echo '<p>Hello World</p>'; ?> 
+                  die("There was a fatal error");
                 $(document).ready(function(){
                     $('.step2_radio').click(function(){
                         var inputValue = $(this).attr("value");
