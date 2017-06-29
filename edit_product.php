@@ -84,7 +84,7 @@ $product_main['product_specification'] = $_POST['product_specification'];
 $product_main['product_sources'] = $_POST['product_source'];
 $product_main['function_data'] = $_POST['function_data'];
 
-$product_main['edited_user_id'] = $_SESSION['edited_user_id'];
+$product_main['edited_user_id'] = $_SESSION['user_id'];
 $product_main['modified'] = date('Y-m-d H:i:s');
 $product_main['product_developing'] = $_POST['product_developing'];
 $product_main['development_partners'] = $_POST['development_partners'];
