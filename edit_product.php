@@ -123,7 +123,7 @@ $del_query = "DELETE from product_milestones WHERE product_id=".$product_id;
 $conn->query($del_query); 
 
 while(!empty($_POST['Milestonetitle_'.$m])){
-    $milestone_query = "INSERT INTO product_milestones(milestone_title,milestone_date,milestone_type) VALUES('".$_POST['Milestonetitle_'.$m]."','".$_POST['Milestonedate_'.$m]."','".$_POST['Milestonetype_'.$m]."')";
+    $milestone_query = "INSERT INTO product_milestones(product_id,milestone_title,milestone_date,milestone_type) VALUES(".$product_id.",'".$_POST['Milestonetitle_'.$m]."','".$_POST['Milestonedate_'.$m]."','".$_POST['Milestonetype_'.$m]."')";
 	$conn->query($milestone_query);
 	$m++;
 }

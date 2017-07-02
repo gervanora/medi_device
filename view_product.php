@@ -1,9 +1,9 @@
 <?php include 'includes/header.php';
- 	$sql = "Select products.*,company.company_name FROM products LEFT JOIN company on products.company_id = company.id WHERE products.id=".$_GET['id'];
+ 	$sql = "Select products.*,company.company_name,indication.indication_name,application.application FROM products LEFT JOIN company on products.company_id = company.id LEFT JOIN indication on products.indication_id = indication.id LEFT JOIN application on products.application_id = application.id WHERE products.id=".$_GET['id'];
 	$result = $conn->query($sql);
 
 	$data = $result->fetch_assoc();
-	//print_r($data);
+	print_r($data);
 
 	$milestones_sql = 'Select * FROM product_milestones WHERE product_id='.$_GET['id'];
 	$milestone_res = $conn->query($milestones_sql);
@@ -17,6 +17,13 @@
 
 	if ($class_res->num_rows > 0) {
 		$classification_data = $class_res->fetch_all();
+	}
+
+	$tech_sql = 'Select product_technology.id,product_technology.technology FROM product_to_technology LEFT JOIN product_technology ON product_to_technology.product_technology_id = product_technology.id WHERE product_id='.$_GET['id'];
+	$tech_res = $conn->query($tech_sql);
+
+	if ($tech_res->num_rows > 0) {
+		$technology_data = $tech_res->fetch_all();
 	}
 
 	$pipeline_sql = "SELECT * FROM `pipeline_product` WHERE product_id = ".$_GET['id'];
@@ -131,8 +138,17 @@
 	</div>
 	<?php } ?>
 	<div id="product_description"><?php echo $data['product_description']; ?></div>
-    <div>Technologies</div>
+    <?php if(!empty($technology_data)){ ?>
+    <div><b>Technologies</b></div>
+    <ul>
+    <?php foreach($technology_data as $technology){ ?>
+         <li><?php echo $technology[1]; ?></li>
+    <?php } ?>
+    </ul>
+    <?php } ?>
     <div id="product_tech_description"><?php echo $data['product_tech_description']; ?></div>
+    <div id="product_indication"><?php echo $data['indication_name']; ?></div>
+    <div id="application"><?php echo $data['application']; ?></div>
     <div id="prod_specification"><?php echo $data['product_specification']; ?></div>
     <div id="product_sources"><?php echo $data['product_sources']; ?></div>
 </div>

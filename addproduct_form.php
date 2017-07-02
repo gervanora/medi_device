@@ -174,7 +174,7 @@
 
                 <div class="form_div">
                   <label>Approved Country: </label>
-                    <select id='approved_country'>
+                    <select id='market_approved_country'>
                       <option value=""></option>
                       <?php foreach($countries as $country) { ?>
                         <option value="<?php echo $country[2]; ?>"><?php echo $country[2]; ?></option>
@@ -184,7 +184,7 @@
 
                 <div class="form_div">
                     <label>Concern Regulatory body : </label>
-                    <select onChange="myFunction()" id="country_reg_body">
+                    <select onChange="myFunction()" id="market_country_reg_body">
                       <option value="select">select</option>
                       <?php foreach ($reg_bodies as $reg_body) { ?>
                         <option value="<?php echo $reg_body[1]; ?>"><?php echo $reg_body[1]; ?></option> 
@@ -400,8 +400,8 @@
                   });
 
                    $('#save_marketed a').click(function(){
-                    var approved_country = $('#approved_country').val();
-                    var country_reg_body = $('#country_reg_body').val();
+                    var approved_country = $('#market_approved_country').val();
+                    var country_reg_body = $('#market_country_reg_body').val();
                     var k_num = $('#510k_num').val();
                     var pma_num = $('#pma_num').val();
                     var submission_date = $('#submission_date').val();
