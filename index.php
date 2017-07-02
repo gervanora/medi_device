@@ -244,11 +244,11 @@
               <td>&nbsp;</td>
 			</thead>
 			<tbody>
-             <?php if ($result->num_rows > 0) {
+             <?php $i=1; if ($result->num_rows > 0) {
              			while($row = $result->fetch_assoc()) {
              ?>
 				<tr>
-					<td><?php echo $row['id']; ?></td>
+					<td><?php echo $i; ?></td>
 					<td><?php echo $row['brand_name']; ?></td>
 					<td>
 						<?php
@@ -277,7 +277,7 @@
 					<td><?php echo date('d/m/Y H:i:s',strtotime($row['modified'])); ?></td>
 					<td><a href="delete.php?type=product&id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
 				</tr>
-			 <?php	}
+			 <?php	$i++; }
 				}
 			    ?>
 			</tbody>

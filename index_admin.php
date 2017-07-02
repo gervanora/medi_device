@@ -245,11 +245,11 @@
 			  <td><b>Only for Admin</b></td>
 			</thead>
 			<tbody>
-             <?php if ($result->num_rows > 0) {
+             <?php $i = 1; if ($result->num_rows > 0) {
              			while($row = $result->fetch_assoc()) {
              ?>
 				<tr>
-					<td><?php echo $row['id']; ?></td>
+					<td><?php echo $i; ?></td>
 					<td><?php echo $row['brand_name']; ?></td>
 					<td>
 						<?php
@@ -281,7 +281,7 @@
 					<td><a href="delete.php?type=product&id=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete?')">Delete</a></td>
 					<td><a id="update_link_<?php echo $row['id']; ?>" href="update.php?type=product&id=<?php echo $row['id']; ?>&approval_status=<?php echo $row['approval_status']; ?>" onclick="return confirm('Are you sure you want to update?')">Update</a></td>
 				</tr>
-			 <?php	}
+			 <?php	$i++; }
 				}
 			    ?>
 			</tbody>

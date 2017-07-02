@@ -63,7 +63,6 @@
                     <?php } ?>
                     </select>
                   </div>
-                  exit(0);
                   <div class="form_div">
                     <label>Highest Stage of Development: </label>
                     <select id='highest_stage_development'>

@@ -34,6 +34,7 @@
 <?php include 'db_config.php'; 
 	  //echo "here"; die;
 	  session_start();
+	  date_default_timezone_set('Asia/Kolkata');
 	  //print_r($_SESSION); die;
 	  //print_r($_SERVER['REQUEST_URI']); die;
 	  //if(empty($_SESSION['token']) && $_SERVER['REQUEST_URI'] != '/medi_device/index.php' ){
