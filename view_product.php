@@ -3,8 +3,7 @@
 	$result = $conn->query($sql);
 
 	$data = $result->fetch_assoc();
-	print_r($data);
-
+	
 	$milestones_sql = 'Select * FROM product_milestones WHERE product_id='.$_GET['id'];
 	$milestone_res = $conn->query($milestones_sql);
 
