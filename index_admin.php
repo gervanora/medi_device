@@ -292,7 +292,7 @@
 	$('document').ready(function(){
 
 		$('.approval_status').change(function(){
-			var approval_status = $('.approval_status').val();
+			var approval_status = $(this).val();
 			//alert(approval_status);
 			var attr_id = $(this).attr('id');
 			var id_paths = attr_id.split('_');
@@ -301,6 +301,7 @@
 			var update_link = $('#'+record_id).attr('href');
 			//alert(update_link);
 			update_link = update_link.slice(0, -1);
+			//alert(update_link);
 			update_link = update_link+approval_status;
 			//alert(update_link);
 			$('#'+record_id).attr('href',update_link);
