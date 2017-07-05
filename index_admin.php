@@ -240,6 +240,7 @@
 			  <td>Author</td>
               <td>&nbsp;</td>
               <td>Approval status</td>
+              <td>Last Modified Author Name</td>
               <td>Last Modified Date</td>
               <td>&nbsp;</td>
 			  <td><b>Only for Admin</b></td>
