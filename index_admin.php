@@ -267,7 +267,7 @@
 					</td>
 					<td><?php echo $row['company_name']; ?></td>
 					<td><?php echo $row['username']; ?></td>
-					<td><a href="view_product.php?id=<?php echo $row['id']; ?>">View</a></td>
+					<td><a href="view_product.php?id=<?php echo $row['id']; ?>">View</a> <a href="editproduct_form.php?id=<?php echo $row['id']; ?>">Edit</a></td>
 					<td>
 
 						<div class="form_div">
