@@ -2,7 +2,7 @@
     include 'includes/db_config.php';
 
 	if(!isset($_GET['id'])){ // to add order condition with $_GET['type']
-		header("Location: /medi_device/index.php"); 
+		header("Location: index.php"); 
 	}
 	else{
 		switch ($_GET['type']) {
@@ -11,7 +11,7 @@
 				$conn->query($upd_sql); 
 				//$upd_sql1 = 'commit';
 				//$conn->query($upd_sql1); 
-				header("Location: /medi_device/index_admin.php"); 
+				header("Location: index_admin.php"); 
 				
 				break;
 			/*case 'company':
